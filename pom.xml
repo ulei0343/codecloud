@@ -8,6 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>code-message</module>
+		<module>code-task</module>
 	</modules>
     <packaging>pom</packaging>
 
