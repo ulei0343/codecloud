@@ -9,6 +9,7 @@
     <modules>
         <module>code-message</module>
 		<module>code-task</module>
+		<module>code-eureka-server</module>
 	</modules>
     <packaging>pom</packaging>
 
@@ -39,5 +40,37 @@
 		</dependencies>
 	</dependencyManagement>
 
+	<repositories>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>spring-libs-milestones</id>
+			<name>Spring Maven MILESTONE Repository</name>
+			<url>http://repo.spring.io/libs-milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>springframework-milestone</id>
+			<name>Spring Framework Maven Release Repository</name>
+			<url>http://maven.springframework.org/milestone/</url>
+		</repository>
+		<repository>
+			<id>springframework-snapshot</id>
+			<url> http://maven.springframework.org/snapshot</url>
+		</repository>
+		<repository>
+			<id>springframework-libs-release</id>
+			<name>Spring Maven RELEASE Repository</name>
+			<url>http://repo.spring.io/libs-release</url>
+		</repository>
+	</repositories>
 
 </project>
