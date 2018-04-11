@@ -14,7 +14,7 @@
     <modules>
         <module>code-message-client</module>
         <module>code-message-api</module>
+        <module>code-message-server</module>
     </modules>
-
 
 </project>
