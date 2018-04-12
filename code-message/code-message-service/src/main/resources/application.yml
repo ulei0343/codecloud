@@ -1,20 +1,5 @@
 spring:
   application:
     name: message-service
-  mail:
-    host:
-    username:
-    password:
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
-server:
-  port: 10001
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    service-url:
-      defaultZone: http://localhost:9001/eureka
+  profiles:
+    active: dev

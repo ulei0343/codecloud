@@ -10,6 +10,8 @@
         <module>code-message</module>
         <module>code-task</module>
         <module>code-eureka-server</module>
+        <module>code-base</module>
+        <module>code-config-server</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -48,6 +50,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>club.codecloud</groupId>
+            <artifactId>code-base</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

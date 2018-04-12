@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/ulei0343/codecloud.git
+          search-paths: code-config-server
+          username: ulei0343
+          password: *******
+server:
+  port: 20501
