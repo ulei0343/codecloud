@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class MailMessageServiceImpl implements MailMessageService {
     private final static Logger logger = LoggerFactory.getLogger(MailMessageServiceImpl.class);
     @Autowired
-private AmqpTemplate rabbitMQTemplate;
+    private AmqpTemplate rabbitmqTemplate;
 
 
     @Override
     public void send(String content) {
         logger.info(content);
         logger.info("已发送给消息队列");
-        rabbitMQTemplate.convertAndSend("mail", content);
+        rabbitmqTemplate.convertAndSend("mail", content);
     }
 }
