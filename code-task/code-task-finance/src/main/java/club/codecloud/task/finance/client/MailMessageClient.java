@@ -1,6 +1,6 @@
 package club.codecloud.task.finance.client;
 
-import club.codecloud.message.api.service.EmailMessageService;
+import club.codecloud.message.api.service.MailMessageService;
 import org.springframework.cloud.openfeign.FeignClient;
 
 /**
@@ -9,5 +9,5 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @date 2018/4/12
  */
 @FeignClient(value = "MESSAGE-SERVICE")
-public interface EmailMessageClient extends EmailMessageService {
+public interface MailMessageClient extends MailMessageService {
 }

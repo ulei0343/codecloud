@@ -1,6 +1,6 @@
 package club.codecloud.task.finance.controller;
 
-import club.codecloud.message.api.service.EmailMessageService;
+import club.codecloud.message.api.service.MailMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,12 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @Autowired
-    EmailMessageService emailMessageClient;
-
+    MailMessageService mailMessageClient;
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public String helloConsumer3(@RequestParam(value = "content") String content) {
-        emailMessageClient.send(content);
+    public String test(@RequestParam(value = "content") String content) {
+        mailMessageClient.send(content);
         System.out.println(content);
         return "success";
     }

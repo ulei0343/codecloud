@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @date 2018/4/12
  */
 @RequestMapping("/message/email")
-public interface EmailMessageService {
+public interface MailMessageService {
 
     @RequestMapping(value = "send", method = RequestMethod.GET)
     void send(@RequestParam(value = "content") String content);
