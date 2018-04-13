@@ -1,18 +1,24 @@
-club.codecloud
+### code-config-server
 
-code-parent
+> 配置中心
 
+### code-eureka-server
 
-code-task
+> 注册中心
 
-code-task-finance
+### code-message
 
+> 消息服务模块
 
-code-message
+- 邮件
+- 短信
+- 微信
 
-code-message-api
+### code-task
 
-code-message-server
+> 定时任务服务模块
 
-code-message-client
+#### code-task-finance
+
+- 金融服务定时任务
 
