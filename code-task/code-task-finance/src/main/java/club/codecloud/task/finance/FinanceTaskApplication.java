@@ -1,7 +1,8 @@
 package club.codecloud.task.finance;
 
-import org.springframework.boot.SpringApplication;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -16,6 +17,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 public class FinanceTaskApplication {
     public static void main(String[] args) {
-        SpringApplication.run(FinanceTaskApplication.class, args);
+        new SpringApplicationBuilder(FinanceTaskApplication.class).web(WebApplicationType.SERVLET).run(args);
     }
 }

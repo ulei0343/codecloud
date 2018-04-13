@@ -1,8 +1,0 @@
-server:
-  port: 20001
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    service-url:
-      defaultZone: http://localhost:9001/eureka

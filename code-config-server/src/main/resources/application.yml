@@ -6,12 +6,18 @@ spring:
       server:
         git:
           # 配置Git仓库位置
-          uri: https://github.com/ulei0343/codecloud.git
+          uri: https://github.com/ulei0343/config-repository.git
           # 配置仓库路径下的相对搜索位置， 可以配置多个
-          search-paths: code-config-server
+          search-paths: /**
           # 访问 Git 仓库的用户名
           username: ulei0343
           # 访问 Git 仓库的用户密码
           password: *******
 server:
   port: 20501
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:9001/eureka

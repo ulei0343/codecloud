@@ -18,15 +18,9 @@ public class GoldPriceQueryTask {
     /**
      * 周一到周五，指定时间点，每分钟执行一次
      */
-    @Scheduled(cron = "0 0/1 0,1,2,9,10,11,13,14,15,20,21,22,23 ? * MON-FRI")
+    @Scheduled(cron = "0 0/10 0,1,2,9,10,11,13,14,15,20,21,22,23 ? * MON-FRI")
     public void exec() {
-        System.out.println(System.currentTimeMillis());
         mailMessageClient.send("mail");
     }
 
-    @Scheduled(cron = "0/5 * * * * ?")
-    public void test() {
-        System.out.println(System.currentTimeMillis());
-        mailMessageClient.send("mail");
-    }
 }
