@@ -11,5 +11,13 @@
 
     <artifactId>code-base</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+
+    </dependencies>
+
 
 </project>

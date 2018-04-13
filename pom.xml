@@ -21,6 +21,9 @@
         <java.version>1.8</java.version>
         <spring-boot.version>2.0.0.RELEASE</spring-boot.version>
         <spring-cloud.version>Finchley.M9</spring-cloud.version>
+        <guava.version>23.0</guava.version>
+        <common-lang3.version>3.7</common-lang3.version>
+
     </properties>
 
     <dependencyManagement>
@@ -51,6 +54,20 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${common-lang3.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>club.codecloud</groupId>
             <artifactId>code-base</artifactId>
