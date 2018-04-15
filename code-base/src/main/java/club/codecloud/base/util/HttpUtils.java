@@ -2,7 +2,6 @@ package club.codecloud.base.util;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
@@ -32,9 +31,6 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.nio.charset.Charset;
 import java.nio.charset.CodingErrorAction;
 import java.security.KeyManagementException;
 import java.security.cert.CertificateException;
@@ -54,11 +50,6 @@ public class HttpUtils {
      * 默认超时时间
      */
     private static final int DEFAULT_TIME_OUT = 3 * 1000;
-
-    /**
-     * 默认编码
-     */
-    private static final String DEFAULT_ENCODING = "UTF-8";
 
     /**
      * 最大header数量
@@ -172,7 +163,7 @@ public class HttpUtils {
     private static void initDefaultHeader() {
         requestHeaders = Maps.newHashMap();
         requestHeaders.put("Accept", "*/*");
-        requestHeaders.put("Accept-Encoding", "gzip, deflate, sdch, br");
+        requestHeaders.put("Accept-Encoding", "gzip, deflate");
         requestHeaders.put("Accept-Language", "zh-CN,zh;q=0.8");
         requestHeaders.put("Upgrade-Insecure-Requests", "1");
         requestHeaders.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36");
@@ -188,7 +179,7 @@ public class HttpUtils {
     }
 
     public static String get(String url, Map<String, String> params) {
-        return get(url, DEFAULT_TIME_OUT, null, params, DEFAULT_ENCODING);
+        return get(url, DEFAULT_TIME_OUT, null, params, CharsetUtils.UTF_8);
     }
 
     public static String get(String url) {
@@ -210,17 +201,7 @@ public class HttpUtils {
 
 
         // 设置请求参数
-        StringBuilder sb = new StringBuilder();
-        sb.append(url);
-        String paramsStr = toParams(params, encoding);
-        if (url.endsWith("&")) {
-            sb.append(paramsStr);
-        } else if (url.endsWith("?")) {
-            sb.append(paramsStr);
-        } else {
-            sb.append("?").append(paramsStr);
-        }
-        String requestUrl = sb.toString();
+        String requestUrl = URLUtils.urlWithForm(url, params);
         logger.info("[HttpUtils Get] begin execute:{}", requestUrl);
         HttpGet httpGet = new HttpGet(requestUrl);
 
@@ -243,7 +224,7 @@ public class HttpUtils {
     }
 
     public static String post(String url, Map<String, String> params) {
-        return post(url, DEFAULT_TIME_OUT, null, params, DEFAULT_ENCODING);
+        return post(url, DEFAULT_TIME_OUT, null, params, CharsetUtils.UTF_8);
     }
 
     /**
@@ -261,8 +242,10 @@ public class HttpUtils {
 
 
         List<NameValuePair> pairs = Lists.newArrayList();
-        for (Map.Entry<String, String> param : params.entrySet()) {
-            pairs.add(new BasicNameValuePair(param.getKey(), param.getValue()));
+        if (params != null) {
+            for (Map.Entry<String, String> param : params.entrySet()) {
+                pairs.add(new BasicNameValuePair(param.getKey(), param.getValue()));
+            }
         }
 
         UrlEncodedFormEntity formEntity = null;
@@ -326,94 +309,10 @@ public class HttpUtils {
     }
 
 
-    public String doPostMap() {
-        return null;
-    }
-
-    /**
-     * 编码字符
-     *
-     * @param content 被编码内容
-     * @param charset 编码
-     * @return 编码后的字符
-     */
-    public static String encode(String content, Charset charset) {
-        return encode(content, charset.name());
-    }
-
-    /**
-     * 编码字符
-     *
-     * @param content    被编码内容
-     * @param charsetStr 编码
-     * @return 编码后的字符
-     */
-    public static String encode(String content, String charsetStr) {
-        if (StringUtils.isBlank(content)) {
-            return content;
-        }
-        String encodeContent = null;
-        try {
-            encodeContent = URLEncoder.encode(content, charsetStr);
-        } catch (UnsupportedEncodingException e) {
-            logger.error("encode error", e);
-        }
-        return encodeContent;
-    }
-
-    /**
-     * 解码字符
-     *
-     * @param content 被解码内容
-     * @param charset 编码
-     * @return 编码后的字符
-     */
-    public static String decode(String content, Charset charset) {
-        return decode(content, charset.name());
-    }
-
-    /**
-     * 解码字符
-     *
-     * @param content    被解码内容
-     * @param charsetStr 编码
-     * @return 编码后的字符
-     */
-    public static String decode(String content, String charsetStr) {
-        if (StringUtils.isBlank(content)) {
-            return content;
-        }
-        String encodeContnt = null;
-        try {
-            encodeContnt = URLDecoder.decode(content, charsetStr);
-        } catch (UnsupportedEncodingException e) {
-            logger.error("decode error", e);
-        }
-        return encodeContnt;
-    }
-
-    /**
-     * 将Map形式的Form表单数据转换为Url参数形式<br>
-     * 编码键和值对
-     *
-     * @param paramMap 表单数据
-     * @param charset  编码
-     * @return url参数
-     */
-    public static String toParams(Map<String, String> paramMap, String charset) {
-        if (paramMap == null) {
-            return StringUtils.EMPTY;
-        }
-        StringBuilder sb = new StringBuilder();
-        boolean isFirst = true;
-        for (Map.Entry<String, String> item : paramMap.entrySet()) {
-            if (isFirst) {
-                isFirst = false;
-            } else {
-                sb.append("&");
-            }
-            sb.append(encode(item.getKey(), charset)).append("=").append(encode(item.getValue(), charset));
-        }
-        return sb.toString();
+    public static void main(String[] args) {
+        Map<String, String> params = Maps.newHashMap();
+        params.put("instid", "Au99.99");
+        String data = HttpUtils.post("http://www.sge.com.cn/graph/quotations", params);
+        System.out.println(data);
     }
 }
