@@ -307,12 +307,4 @@ public class HttpUtils {
         }
         return null;
     }
-
-
-    public static void main(String[] args) {
-        Map<String, String> params = Maps.newHashMap();
-        params.put("instid", "Au99.99");
-        String data = HttpUtils.post("http://www.sge.com.cn/graph/quotations", params);
-        System.out.println(data);
-    }
 }

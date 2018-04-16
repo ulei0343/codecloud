@@ -20,8 +20,8 @@ public class MailMessageServiceImpl implements MailMessageService {
 
     @Override
     public void send(String content) {
-        logger.info(content);
-        logger.info("已发送给消息队列");
+        logger.info("消息队列已接收：" + content);
         rabbitmqTemplate.convertAndSend("mail", content);
     }
+
 }

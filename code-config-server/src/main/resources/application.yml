@@ -6,15 +6,17 @@ spring:
       server:
         git:
           # 配置Git仓库位置
-          uri: https://github.com/ulei0343/config-repository.git
+          uri: https://gitee.com/huleilei/config-repository.git
           # 配置仓库路径下的相对搜索位置， 可以配置多个
           search-paths: /**
           # 访问 Git 仓库的用户名
-          username: ulei0343
+          username: huleilei
           # 访问 Git 仓库的用户密码
           password: *******
 server:
   port: 20501
+logging:
+  file: logs/config-server.log
 eureka:
   instance:
     prefer-ip-address: true

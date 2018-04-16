@@ -17,4 +17,12 @@
         <module>code-message-service</module>
     </modules>
 
+    <dependencies>
+        <dependency>
+            <groupId>club.codecloud</groupId>
+            <artifactId>code-base</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
 </project>
