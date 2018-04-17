@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.Map;
+import java.util.Observable;
 
 /**
  * @author ulei
@@ -56,22 +57,27 @@ public class GoldPriceQueryTask {
         // 当前金价
         BigDecimal currentGoldPrice = null;
 
-        for (int i = 1; i < priceArray.size(); i++) {
-            if (priceArray.getBigDecimal(i).compareTo(initValue) == 0) {
-                currentGoldPrice = priceArray.getBigDecimal(i - 1);
+        for (int i = priceArray.size() - 1; i > 0; i--) {
+            if (priceArray.getBigDecimal(i).compareTo(initValue) > 0) {
+                currentGoldPrice = priceArray.getBigDecimal(i);
+                logger.info("[{}]金价：{}", timesArray.get(i), currentGoldPrice.doubleValue());
                 break;
             }
-            logger.info("{}-----------{}", timesArray.getString(i), priceArray.getDoubleValue(i));
         }
         if (currentGoldPrice == null) {
             logger.warn("没获取到当前金价");
+            return;
         }
 
-        if (currentGoldPrice != null) {
-            // 触发报警
-            if (currentGoldPrice.compareTo(ALARM_VALUE) > 0) {
-                logger.info("当前金价：{}，已超过报警值：{}", currentGoldPrice, ALARM_VALUE);
-            }
+        // 触发报警
+        if (currentGoldPrice.compareTo(ALARM_VALUE) > 0) {
+            logger.info("当前金价：{}，已超过报警值：{}", currentGoldPrice, ALARM_VALUE);
+
+            //放置一个被观察者
+            Observable observable = new Observable();
+            observable.addObserver(new GoldPriceObserver());
+            observable.hasChanged();
+            observable.notifyObservers(currentGoldPrice);
         }
 //        mailMessageClient.send("mail");
     }
