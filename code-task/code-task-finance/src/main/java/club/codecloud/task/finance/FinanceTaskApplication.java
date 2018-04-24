@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @author ulei
  * @date 2018/4/12
  */
-@EnableFeignClients
+@EnableFeignClients(basePackages = {"club.codecloud"})
 @EnableDiscoveryClient
 @EnableScheduling
 @SpringBootApplication

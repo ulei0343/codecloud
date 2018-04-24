@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @RabbitListener(queues = "mail")
-public class MailReceiverListener {
-    private final static Logger logger = LoggerFactory.getLogger(MailReceiverListener.class);
+public class MailSendListener {
+    private final static Logger logger = LoggerFactory.getLogger(MailSendListener.class);
 
     @RabbitHandler
     public void sendMail(String content) {

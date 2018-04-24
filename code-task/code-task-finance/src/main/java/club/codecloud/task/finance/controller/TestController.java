@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @Autowired
-    MailMessageService mailMessageClient;
+    MailMessageService mailMessageService;
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test(@RequestParam(value = "content") String content) {
-        mailMessageClient.send(content);
+        mailMessageService.send(content);
         System.out.println(content);
         return "success";
     }

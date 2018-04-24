@@ -1,7 +1,7 @@
 package club.codecloud.task.finance.task;
 
 import club.codecloud.base.util.HttpUtils;
-import club.codecloud.task.finance.client.MailMessageClient;
+import club.codecloud.message.api.service.MailMessageService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -41,12 +41,12 @@ public class GoldPriceQueryTask {
     private static final BigDecimal ALARM_VALUE = new BigDecimal(275.00);
 
     @Autowired
-    MailMessageClient mailMessageClient;
+    MailMessageService mailMessageService;
 
     /**
      * 周一到周五，指定时间点，每分钟执行一次
      */
-    @Scheduled(cron = "0 0/1 0,1,2,9,10,11,13,14,15,20,21,22,23 ? * MON-FRI")
+//    @Scheduled(cron = "0 0/1 0,1,2,9,10,11,13,14,15,20,21,22,23 ? * MON-FRI")
     public void exec() {
         String data = HttpUtils.post(QUERY_URL, PARAMS);
         JSONObject result = JSON.parseObject(data);
@@ -79,6 +79,6 @@ public class GoldPriceQueryTask {
             observable.hasChanged();
             observable.notifyObservers(currentGoldPrice);
         }
-//        mailMessageClient.send("mail");
+//        mailMessageService.send("mail");
     }
 }
