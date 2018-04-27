@@ -1,7 +1,7 @@
 package club.codecloud.task.finance.task;
 
 import club.codecloud.base.util.HttpUtils;
-import club.codecloud.message.api.service.MailMessageService;
+import club.codecloud.task.finance.client.MailClient;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -9,7 +9,6 @@ import com.google.common.collect.ImmutableMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -41,7 +40,7 @@ public class GoldPriceQueryTask {
     private static final BigDecimal ALARM_VALUE = new BigDecimal(275.00);
 
     @Autowired
-    MailMessageService mailMessageService;
+    MailClient mailClient;
 
     /**
      * 周一到周五，指定时间点，每分钟执行一次
