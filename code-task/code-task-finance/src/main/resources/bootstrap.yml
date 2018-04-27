@@ -5,7 +5,7 @@ spring:
     config:
       profile: dev
       label: master
-      uri: http://config.codecloud.club:20501
+      uri: http://www.codecloud.club:20501
       fail-fast: true
       retry:
         # 最大重试次数
