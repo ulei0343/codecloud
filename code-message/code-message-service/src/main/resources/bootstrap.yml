@@ -10,3 +10,5 @@ spring:
       retry:
         # 最大重试次数
         max-attempts: 3
+  mail:
+    password:

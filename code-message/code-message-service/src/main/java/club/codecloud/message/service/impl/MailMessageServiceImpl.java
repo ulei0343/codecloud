@@ -20,12 +20,6 @@ public class MailMessageServiceImpl implements MailMessageService {
 
     @Override
     public void send(String content) {
-//        Integer error = Integer.valueOf("error");
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         logger.info("消息队列已接收：" + content);
         rabbitmqTemplate.convertAndSend("mail", content);
     }
