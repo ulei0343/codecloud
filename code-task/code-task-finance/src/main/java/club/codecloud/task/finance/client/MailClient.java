@@ -19,10 +19,10 @@ public interface MailClient extends MailService {
  */
 @Component
 class MailClientFallback extends MailServiceFallback implements MailClient {
-    /*@Override
+    @Override
     public void send(String content) {
         System.out.println("异常降级");
-    }*/
+    }
 }
 
 

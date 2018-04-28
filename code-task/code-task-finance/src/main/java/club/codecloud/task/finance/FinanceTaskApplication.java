@@ -15,7 +15,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @author ulei
  * @date 2018/4/12
  */
-@EnableFeignClients(basePackages = "club.codecloud")
+@EnableFeignClients(basePackages = "club.codecloud.task.finance.client")
 @ComponentScan(basePackages = "club.codecloud")
 @EnableHystrixDashboard
 @EnableScheduling
