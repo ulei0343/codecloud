@@ -1,9 +1,8 @@
 package club.codecloud.task.finance.client;
 
 import club.codecloud.message.api.service.MailService;
-import club.codecloud.message.api.service.fallback.MailServiceFallback;
+import club.codecloud.task.finance.client.fallback.MailClientFallback;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.stereotype.Component;
 
 /**
  * @author ulei
@@ -14,15 +13,6 @@ public interface MailClient extends MailService {
 
 }
 
-/**
- * 降级策略
- */
-@Component
-class MailClientFallback extends MailServiceFallback implements MailClient {
-    @Override
-    public void send(String content) {
-        System.out.println("异常降级");
-    }
-}
+
 
 
