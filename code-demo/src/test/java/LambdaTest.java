@@ -1,3 +1,4 @@
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 
 import java.util.Comparator;
@@ -58,6 +59,9 @@ public class LambdaTest {
                 .sorted(Comparator.comparing(Student::getAge).reversed())
                 .mapToInt(Student::getAge)
                 .forEach(System.out::println);
+
+        String names = Joiner.on(",").skipNulls().join(studentList.stream().map(Student::getName).toArray());
+        System.out.println(names);
 
     }
 }
