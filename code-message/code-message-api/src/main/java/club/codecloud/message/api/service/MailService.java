@@ -8,9 +8,12 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author ulei
  * @date 2018/4/12
  */
-@RequestMapping("/message/email")
-public interface MailMessageService {
+public interface MailService {
 
-    @RequestMapping(value = "send", method = RequestMethod.GET)
+    @RequestMapping(value = "/message/email/send", method = RequestMethod.GET)
     void send(@RequestParam(value = "content") String content);
+
+
 }
+
+
