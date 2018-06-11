@@ -12,6 +12,7 @@
         <module>code-eureka-server</module>
         <module>code-base</module>
         <module>code-config-server</module>
+        <module>code-demo</module>
     </modules>
     <packaging>pom</packaging>
 
