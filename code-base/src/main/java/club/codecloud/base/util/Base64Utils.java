@@ -1,0 +1,84 @@
+package club.codecloud.base.util;
+
+import java.util.Base64;
+
+/**
+ * @author ulei
+ * @date 2018/6/29
+ * <p>
+ * Base64算法加解密
+ */
+public final class Base64Utils {
+
+    private static final String CHARSET_UTF_8 = "UTF-8";
+
+    /**
+     * BASE64编码
+     *
+     * @param data
+     * @return
+     * @throws Exception
+     */
+    public static byte[] encode(byte[] data) {
+        try {
+            return Base64.getEncoder().encode(data);
+        } catch (Exception e) {
+            throw new RuntimeException("加密错误，错误信息：", e);
+        }
+    }
+
+    /**
+     * BASE64编码
+     *
+     * @param data
+     * @return
+     * @throws Exception
+     */
+    public static String encode(String data) {
+        try {
+            return Base64.getEncoder().encodeToString(data.getBytes(CHARSET_UTF_8));
+        } catch (Exception e) {
+            throw new RuntimeException("加密错误，错误信息：", e);
+        }
+    }
+
+
+    /**
+     * BASE64解码
+     *
+     * @param data
+     * @return
+     * @throws Exception
+     */
+    public static byte[] decode(byte[] data) {
+        try {
+            return Base64.getDecoder().decode(data);
+        } catch (Exception e) {
+            throw new RuntimeException("Base64解密错误，错误信息：", e);
+        }
+    }
+
+    /**
+     * BASE64解码
+     *
+     * @param data
+     * @return
+     * @throws Exception
+     */
+    public static String decode(String data) {
+        try {
+            return new String(Base64.getDecoder().decode(data));
+        } catch (Exception e) {
+            throw new RuntimeException("Base64解密错误，错误信息：", e);
+        }
+    }
+
+
+    public static void main(String[] args) {
+        String encode = Base64Utils.encode("你好 world");
+        System.out.println(encode);
+
+        String decode = Base64Utils.decode(encode);
+        System.out.println(decode);
+    }
+}

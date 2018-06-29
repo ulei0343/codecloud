@@ -7,6 +7,10 @@ import java.security.MessageDigest;
  */
 public class MD5Utils {
 
+    private static final String CHARSET_UTF_8 = "UTF-8";
+
+    private static final String MD5 = "MD5";
+
     /**
      * MD5加密
      *
@@ -17,9 +21,9 @@ public class MD5Utils {
         MessageDigest messageDigest = null;
         StringBuffer md5StrBuff = new StringBuffer();
         try {
-            messageDigest = MessageDigest.getInstance("MD5");
+            messageDigest = MessageDigest.getInstance(MD5);
             messageDigest.reset();
-            messageDigest.update(message.getBytes("UTF-8"));
+            messageDigest.update(message.getBytes(CHARSET_UTF_8));
 
             byte[] byteArray = messageDigest.digest();
             for (int i = 0; i < byteArray.length; i++) {
@@ -30,7 +34,7 @@ public class MD5Utils {
                 }
             }
         } catch (Exception e) {
-            throw new RuntimeException("加密错误，错误信息：", e);
+            throw new RuntimeException("MD5加密错误，错误信息：", e);
         }
         return md5StrBuff.toString().toUpperCase();// 字母大写
     }
@@ -43,7 +47,7 @@ public class MD5Utils {
      */
     public static String md5(String str) {
         try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
+            MessageDigest md = MessageDigest.getInstance(MD5);
             md.update(str.getBytes());
             byte b[] = md.digest();
             int i;
@@ -60,7 +64,7 @@ public class MD5Utils {
             }
             str = buf.toString();
         } catch (Exception e) {
-            throw new RuntimeException("加密错误，错误信息：", e);
+            throw new RuntimeException("MD5加密错误，错误信息：", e);
 
         }
         return str;

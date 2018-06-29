@@ -46,6 +46,8 @@ public class HttpUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpUtils.class);
 
+    private static final String UTF_8 = "UTF-8";
+
     /**
      * 默认超时时间
      */
@@ -179,7 +181,7 @@ public class HttpUtils {
     }
 
     public static String get(String url, Map<String, String> params) {
-        return get(url, DEFAULT_TIME_OUT, null, params, CharsetUtils.UTF_8);
+        return get(url, DEFAULT_TIME_OUT, null, params, UTF_8);
     }
 
     public static String get(String url) {
@@ -224,7 +226,7 @@ public class HttpUtils {
     }
 
     public static String post(String url, Map<String, String> params) {
-        return post(url, DEFAULT_TIME_OUT, null, params, CharsetUtils.UTF_8);
+        return post(url, DEFAULT_TIME_OUT, null, params, UTF_8);
     }
 
     /**
