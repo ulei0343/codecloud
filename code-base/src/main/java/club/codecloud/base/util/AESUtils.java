@@ -17,7 +17,7 @@ public class AESUtils {
     /**
      * 密钥算法
      */
-    private static final String KEY_ALGORITHM = "AES";
+    private static final String AES = "AES";
     private static final int KEY_SIZE = 128;
     /**
      * 加密/解密算法/工作模式/填充方法
@@ -30,7 +30,7 @@ public class AESUtils {
 
     static {
         try {
-            keyGenerator = KeyGenerator.getInstance(KEY_ALGORITHM);
+            keyGenerator = KeyGenerator.getInstance(AES);
         } catch (Exception e) {
             throw new RuntimeException("init AESUtils error", e);
         }
@@ -66,7 +66,7 @@ public class AESUtils {
     public static byte[] encrypt(byte[] data, byte[] key) {
         try {
             //还原密钥
-            Key k = new SecretKeySpec(key, KEY_ALGORITHM);
+            Key k = new SecretKeySpec(key, AES);
             /**
              * 实例化
              * 使用PKCS7Padding填充方式，按如下方式实现
@@ -111,7 +111,7 @@ public class AESUtils {
     private static byte[] decrypt(byte[] data, byte[] key) {
         try {
             //还原密钥
-            Key k = new SecretKeySpec(key, KEY_ALGORITHM);
+            Key k = new SecretKeySpec(key, AES);
             /**
              * 实例化
              * 使用PKCS7Padding填充方式，按如下方式实现

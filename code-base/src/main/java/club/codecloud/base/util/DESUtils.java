@@ -20,7 +20,7 @@ public final class DESUtils {
      * Java 6 只支持56bit密钥 <br>
      * Bouncy Castle 支持64bit密钥
      */
-    private static final String KEY_ALGORITHM = "DES";
+    private static final String DES = "DES";
 
     /**
      * 加密/解密算法 / 工作模式 / 填充方式
@@ -35,7 +35,7 @@ public final class DESUtils {
 
     static {
         try {
-            keyGenerator = KeyGenerator.getInstance(KEY_ALGORITHM);
+            keyGenerator = KeyGenerator.getInstance(DES);
         } catch (Exception e) {
             throw new RuntimeException("init DESUtils error", e);
         }
@@ -68,7 +68,7 @@ public final class DESUtils {
     public static byte[] encrypt(byte[] data, byte[] key) {
         try {
             // 还原密钥
-            Key k = new SecretKeySpec(key, KEY_ALGORITHM);
+            Key k = new SecretKeySpec(key, DES);
             // 实例化
             Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
             // 初始化，设置为加密模式
@@ -106,7 +106,7 @@ public final class DESUtils {
     public static byte[] decrypt(byte[] data, byte[] key) {
         try {
             // 还原密钥
-            Key k = new SecretKeySpec(key, KEY_ALGORITHM);
+            Key k = new SecretKeySpec(key, DES);
             // 实例化
             Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
             // 初始化，设置为加密模式
