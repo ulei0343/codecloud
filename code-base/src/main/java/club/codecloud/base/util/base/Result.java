@@ -1,4 +1,4 @@
-package club.codecloud.base.util;
+package club.codecloud.base.util.base;
 
 import club.codecloud.base.constant.ResultCode;
 

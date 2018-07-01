@@ -1,4 +1,4 @@
-package club.codecloud.base.util;
+package club.codecloud.base.util.security;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;

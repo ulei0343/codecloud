@@ -1,4 +1,4 @@
-package club.codecloud.base.util;
+package club.codecloud.base.util.security;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;

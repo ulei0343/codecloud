@@ -1,6 +1,6 @@
 package club.codecloud.task.finance.task;
 
-import club.codecloud.base.util.HttpUtils;
+import club.codecloud.base.util.net.HttpUtils;
 import club.codecloud.task.finance.client.MailClient;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;

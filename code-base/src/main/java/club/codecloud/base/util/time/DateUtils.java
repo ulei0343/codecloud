@@ -1,4 +1,4 @@
-package club.codecloud.base.util;
+package club.codecloud.base.util.time;
 
 import java.text.DateFormat;
 import java.text.ParseException;

@@ -1,7 +1,7 @@
 package club.codecloud.base.config.exception;
 
 import club.codecloud.base.constant.ResultCode;
-import club.codecloud.base.util.Result;
+import club.codecloud.base.util.base.Result;
 import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package club.codecloud.base.util;
+package club.codecloud.base.util.net;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;

@@ -2,7 +2,7 @@ package club.codecloud.base.config.encrypt.advice;
 
 import club.codecloud.base.config.encrypt.EncryptProperties;
 import club.codecloud.base.config.encrypt.annotation.Encrypt;
-import club.codecloud.base.util.AESUtils;
+import club.codecloud.base.util.security.AESUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;

@@ -1,4 +1,4 @@
-package club.codecloud.base.util;
+package club.codecloud.base.util.net;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

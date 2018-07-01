@@ -1,4 +1,4 @@
-package club.codecloud.base.util;
+package club.codecloud.base.util.security;
 
 import org.apache.commons.codec.binary.Base64;
 
