@@ -80,7 +80,13 @@ public class RegexUtils {
         return isMatch(RegexConsts.PATTERN_REGEX_ZH, input);
     }
 
-    public static boolean isMatch(Pattern pattern, CharSequence input) {
+    public static boolean isMatch(final Pattern pattern, final CharSequence input) {
         return StringUtils.isNotEmpty(input) && pattern.matcher(input).matches();
     }
+
+    public static boolean isMatch(final String regex, @Nullable final CharSequence input) {
+        return !StringUtils.isAnyEmpty(input, regex) && Pattern.matches(regex, input);
+    }
+
+
 }
