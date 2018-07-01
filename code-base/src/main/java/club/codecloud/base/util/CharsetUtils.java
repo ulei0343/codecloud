@@ -7,6 +7,8 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * 字符集工具类
+ * 尽量使用Charsets.UTF8而不是"UTF-8"，减少JDK里的Charset查找消耗.
+ * 使用JDK7的StandardCharsets，同时留了标准名称的字符串
  *
  * @author ulei
  */
@@ -15,28 +17,20 @@ public class CharsetUtils {
     /**
      * ISO-8859-1
      */
-    public static final String ISO_8859_1 = "ISO-8859-1";
+    public static final String ISO_8859_1 = StandardCharsets.ISO_8859_1.name();
     /**
      * UTF-8
      */
-    public static final String UTF_8 = "UTF-8";
-    /**
-     * GBK
-     */
-    public static final String GBK = "GBK";
+    public static final String UTF_8 = StandardCharsets.UTF_8.name();
 
     /**
      * ISO-8859-1
      */
-    public static final Charset CHARSET_ISO_8859_1 = Charset.forName(ISO_8859_1);
+    public static final Charset CHARSET_ISO_8859_1 = StandardCharsets.ISO_8859_1;
     /**
      * UTF-8
      */
-    public static final Charset CHARSET_UTF_8 = Charset.forName(UTF_8);
-    /**
-     * GBK
-     */
-    public static final Charset CHARSET_GBK = Charset.forName(GBK);
+    public static final Charset CHARSET_UTF_8 = StandardCharsets.UTF_8;
 
     private CharsetUtils() {
         // 静态类不可实例化

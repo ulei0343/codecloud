@@ -3,6 +3,7 @@ package club.codecloud.base.util;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.security.SecureRandom;
 import java.util.Base64;
@@ -26,8 +27,6 @@ public final class DESUtils {
      * 加密/解密算法 / 工作模式 / 填充方式
      */
     private static final String CIPHER_ALGORITHM = "DES/ECB/PKCS5PADDING";
-
-    private static final String CHARSET_UTF_8 = "UTF-8";
 
     private static final int KEY_SIZE = 56;
 
@@ -88,7 +87,7 @@ public final class DESUtils {
      */
     public static String encrypt(String data, String key) {
         try {
-            byte[] dataBytes = data.getBytes(CHARSET_UTF_8);
+            byte[] dataBytes = data.getBytes(StandardCharsets.UTF_8);
             byte[] keyBytes = Base64.getDecoder().decode(key);
             // 执行操作
             return Base64.getEncoder().encodeToString(encrypt(dataBytes, keyBytes));
@@ -130,7 +129,7 @@ public final class DESUtils {
         // 还原密钥
         byte[] keyBytes = Base64.getDecoder().decode(key);
         // 执行操作
-        return new String(decrypt(dataBytes, keyBytes), CharsetUtils.CHARSET_UTF_8);
+        return new String(decrypt(dataBytes, keyBytes), StandardCharsets.UTF_8);
     }
 
     public static void main(String[] args) {

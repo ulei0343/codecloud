@@ -30,8 +30,9 @@ import org.slf4j.LoggerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.nio.charset.CodingErrorAction;
+import java.nio.charset.StandardCharsets;
 import java.security.KeyManagementException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -45,8 +46,6 @@ import java.util.Map;
 public class HttpUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpUtils.class);
-
-    private static final String UTF_8 = "UTF-8";
 
     /**
      * 默认超时时间
@@ -181,7 +180,7 @@ public class HttpUtils {
     }
 
     public static String get(String url, Map<String, String> params) {
-        return get(url, DEFAULT_TIME_OUT, null, params, UTF_8);
+        return get(url, DEFAULT_TIME_OUT, null, params, StandardCharsets.UTF_8);
     }
 
     public static String get(String url) {
@@ -199,7 +198,7 @@ public class HttpUtils {
      * @return
      */
     public static String get(String url, int timeout, Map<String, String> headers,
-                             Map<String, String> params, String encoding) {
+                             Map<String, String> params, Charset encoding) {
 
 
         // 设置请求参数
@@ -226,7 +225,7 @@ public class HttpUtils {
     }
 
     public static String post(String url, Map<String, String> params) {
-        return post(url, DEFAULT_TIME_OUT, null, params, UTF_8);
+        return post(url, DEFAULT_TIME_OUT, null, params, StandardCharsets.UTF_8);
     }
 
     /**
@@ -240,7 +239,7 @@ public class HttpUtils {
      * @return
      */
     public static String post(String url, int timeout, Map<String, String> headers,
-                              Map<String, String> params, String encoding) {
+                              Map<String, String> params, Charset encoding) {
 
 
         List<NameValuePair> pairs = Lists.newArrayList();
@@ -253,7 +252,7 @@ public class HttpUtils {
         UrlEncodedFormEntity formEntity = null;
         try {
             formEntity = new UrlEncodedFormEntity(pairs, encoding);
-        } catch (UnsupportedEncodingException e) {
+        } catch (Exception e) {
             logger.error("[HttpUtils Post] encode error url:{},params:{}", url, pairs, e);
         }
         if (formEntity == null) {
@@ -280,7 +279,7 @@ public class HttpUtils {
         return execute(httpPost, encoding);
     }
 
-    private static String execute(HttpRequestBase request, String encoding) {
+    private static String execute(HttpRequestBase request, Charset encoding) {
         try {
             CloseableHttpResponse response = httpClient.execute(request);
             try {

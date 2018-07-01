@@ -3,6 +3,7 @@ package club.codecloud.base.util;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import javax.crypto.Cipher;
+import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
@@ -20,8 +21,6 @@ public final class RSAUtils {
      * 算法名称
      */
     private static final String RSA = "RSA";
-
-    private static final String CHARSET_UTF_8 = "UTF-8";
 
     /**
      * 密钥大小
@@ -123,7 +122,7 @@ public final class RSAUtils {
      */
     public static String encryptByPublicKey(String publicKey, String data) {
         try {
-            byte[] dataBytes = data.getBytes(CHARSET_UTF_8);
+            byte[] dataBytes = data.getBytes(StandardCharsets.UTF_8);
             return Base64.getEncoder().encodeToString(encryptByPublicKey(getPublicKey(publicKey), dataBytes));
         } catch (Exception e) {
             throw new RuntimeException("RSA加密出错", e);
@@ -158,7 +157,7 @@ public final class RSAUtils {
      */
     public static String encryptByPrivateKey(String privateKey, String data) {
         try {
-            byte[] dataBytes = data.getBytes(CHARSET_UTF_8);
+            byte[] dataBytes = data.getBytes(StandardCharsets.UTF_8);
             return Base64.getEncoder().encodeToString(encryptByPrivateKey(getPrivateKey(privateKey), dataBytes));
         } catch (Exception e) {
             throw new RuntimeException("RSA加密出错", e);
@@ -193,7 +192,7 @@ public final class RSAUtils {
     public static String decryptByPrivateKey(String privateKey, String data) {
         try {
             byte[] dataBytes = Base64.getDecoder().decode(data);
-            return new String(decryptByPrivateKey(getPrivateKey(privateKey), dataBytes), CHARSET_UTF_8);
+            return new String(decryptByPrivateKey(getPrivateKey(privateKey), dataBytes), StandardCharsets.UTF_8);
         } catch (Exception e) {
             throw new RuntimeException("RSA解密出错", e);
         }
@@ -227,7 +226,7 @@ public final class RSAUtils {
     public static String decryptByPublicKey(String publicKey, String data) {
         try {
             byte[] dataBytes = Base64.getDecoder().decode(data);
-            return new String(decryptByPublicKey(getPublicKey(publicKey), dataBytes), CHARSET_UTF_8);
+            return new String(decryptByPublicKey(getPublicKey(publicKey), dataBytes), StandardCharsets.UTF_8);
         } catch (Exception e) {
             throw new RuntimeException("RSA解密出错", e);
         }

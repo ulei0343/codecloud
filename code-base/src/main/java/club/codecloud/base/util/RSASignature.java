@@ -2,6 +2,7 @@ package club.codecloud.base.util;
 
 import org.apache.commons.codec.binary.Base64;
 
+import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
@@ -14,7 +15,6 @@ public final class RSASignature {
 
     private static final String RSA = "RSA";
 
-    private static final String CHARSET_UTF_8 = "UTF-8";
     /**
      * 签名算法
      */
@@ -35,7 +35,7 @@ public final class RSASignature {
             PrivateKey priKey = keyFactory.generatePrivate(priPKCS8);
             Signature signature = java.security.Signature.getInstance(SIGN_ALGORITHMS);
             signature.initSign(priKey);
-            signature.update(data.getBytes(CHARSET_UTF_8));
+            signature.update(data.getBytes(StandardCharsets.UTF_8));
 
             byte[] signed = signature.sign();
 
@@ -62,7 +62,7 @@ public final class RSASignature {
                     .getInstance(SIGN_ALGORITHMS);
 
             signature.initVerify(pubKey);
-            signature.update(data.getBytes(CHARSET_UTF_8));
+            signature.update(data.getBytes(StandardCharsets.UTF_8));
             return signature.verify(Base64.decodeBase64(sign));
         } catch (Exception e) {
             throw new RuntimeException("RSASign验签错误，错误信息：", e);

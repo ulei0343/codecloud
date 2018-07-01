@@ -1,5 +1,6 @@
 package club.codecloud.base.util;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 /**
@@ -9,8 +10,6 @@ import java.util.Base64;
  * Base64算法加解密
  */
 public final class Base64Utils {
-
-    private static final String CHARSET_UTF_8 = "UTF-8";
 
     /**
      * BASE64编码
@@ -36,7 +35,7 @@ public final class Base64Utils {
      */
     public static String encode(String data) {
         try {
-            return Base64.getEncoder().encodeToString(data.getBytes(CHARSET_UTF_8));
+            return Base64.getEncoder().encodeToString(data.getBytes(StandardCharsets.UTF_8));
         } catch (Exception e) {
             throw new RuntimeException("加密错误，错误信息：", e);
         }

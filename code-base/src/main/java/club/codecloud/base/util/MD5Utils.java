@@ -1,13 +1,12 @@
 package club.codecloud.base.util;
 
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
 /**
  * @author ulei
  */
 public final class MD5Utils {
-
-    private static final String CHARSET_UTF_8 = "UTF-8";
 
     private static final String MD5 = "MD5";
 
@@ -23,7 +22,7 @@ public final class MD5Utils {
         try {
             messageDigest = MessageDigest.getInstance(MD5);
             messageDigest.reset();
-            messageDigest.update(message.getBytes(CHARSET_UTF_8));
+            messageDigest.update(message.getBytes(StandardCharsets.UTF_8));
 
             byte[] byteArray = messageDigest.digest();
             for (int i = 0; i < byteArray.length; i++) {

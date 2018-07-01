@@ -1,9 +1,11 @@
 package club.codecloud.base.util;
 
+
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.security.SecureRandom;
 import java.util.Base64;
@@ -23,8 +25,6 @@ public final class AESUtils {
      * 加密/解密算法/工作模式/填充方法
      */
     private static final String CIPHER_ALGORITHM = "AES/ECB/PKCS5PADDING";
-
-    private static final String CHARSET_UTF_8 = "UTF-8";
 
     private static KeyGenerator keyGenerator = null;
 
@@ -92,10 +92,10 @@ public final class AESUtils {
      */
     public static String encrypt(String data, String key) {
         try {
-            byte[] dataBytes = data.getBytes(CHARSET_UTF_8);
+            byte[] dataBytes = data.getBytes(StandardCharsets.UTF_8);
             byte[] keyBytes = Base64.getDecoder().decode(key);
             return Base64.getEncoder().encodeToString(encrypt(dataBytes, keyBytes));
-        } catch (UnsupportedEncodingException e) {
+        } catch (Exception e) {
             throw new RuntimeException("AES加密错误，错误信息：", e);
         }
     }
@@ -141,7 +141,7 @@ public final class AESUtils {
         // 还原密钥
         byte[] keyBytes = Base64.getDecoder().decode(key);
         // 执行操作
-        return new String(decrypt(dataBytes, keyBytes), CharsetUtils.CHARSET_UTF_8);
+        return new String(decrypt(dataBytes, keyBytes), StandardCharsets.UTF_8);
 
     }
 

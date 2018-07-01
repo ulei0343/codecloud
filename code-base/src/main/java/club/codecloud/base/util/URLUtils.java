@@ -8,6 +8,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 /**
@@ -85,10 +86,9 @@ public class URLUtils {
      * 编码键值对
      *
      * @param paramMap 表单数据
-     * @param charset  编码
      * @return url参数
      */
-    public static String toParams(Map<String, String> paramMap, String charset) {
+    public static String toParams(Map<String, String> paramMap) {
         if (paramMap == null) {
             return StringUtils.EMPTY;
         }
@@ -100,7 +100,7 @@ public class URLUtils {
             } else {
                 sb.append("&");
             }
-            sb.append(encode(item.getKey(), charset)).append("=").append(encode(item.getValue(), charset));
+            sb.append(encode(item.getKey(), StandardCharsets.UTF_8)).append("=").append(encode(item.getValue(), StandardCharsets.UTF_8));
         }
         return sb.toString();
     }
@@ -133,7 +133,7 @@ public class URLUtils {
      * @return 合成后的URL
      */
     public static String urlWithForm(String url, Map<String, String> form) {
-        final String queryString = toParams(form, CharsetUtils.UTF_8);
+        final String queryString = toParams(form);
         return urlWithForm(url, queryString);
     }
 
