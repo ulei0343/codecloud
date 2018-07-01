@@ -1,0 +1,6 @@
+server:
+  port: 8080
+
+encrypt:
+  key: Hd5+dZ7ZHijwcA/ZmnSQBg==
+  debug: false

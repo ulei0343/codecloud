@@ -5,7 +5,7 @@ import java.security.MessageDigest;
 /**
  * @author ulei
  */
-public class MD5Utils {
+public final class MD5Utils {
 
     private static final String CHARSET_UTF_8 = "UTF-8";
 

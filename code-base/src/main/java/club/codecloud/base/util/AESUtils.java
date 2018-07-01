@@ -12,7 +12,7 @@ import java.util.Base64;
  * @author ulei
  * @date 2018/6/29
  */
-public class AESUtils {
+public final class AESUtils {
 
     /**
      * 密钥算法

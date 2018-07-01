@@ -10,7 +10,7 @@ import java.security.spec.X509EncodedKeySpec;
  * @author ulei
  * @date 2018/6/29
  */
-public class RSASignature {
+public final class RSASignature {
 
     private static final String RSA = "RSA";
 
