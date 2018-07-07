@@ -1,247 +1,455 @@
 package club.codecloud.base.util.time;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import org.apache.commons.lang3.Validate;
+
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 /**
- * @author ulei
- * @date 2018/4/19
+ * 日期工具类.
+ * <p>
+ * 在不方便使用joda-time时，使用本类降低Date处理的复杂度与性能消耗, 封装Common Lang及移植Jodd的最常用日期方法
  */
 public class DateUtils {
 
-    public static final String DATE_FORMAT = "yyyy-MM-dd";
-
-    public static final String DATE_FORMAT_1 = "yyyy/MM/dd";
-
-    public static final String DATE_FORMAT_2 = "yyyyMMdd";
-
-    public static final String DATE_FORMAT_3 = "yyyy.MM.dd";
-
-    public static final String DATE_FORMAT_CN = "yyyy年MM月dd日";
-
-    public static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
-
-    public static final String DATE_TIME_FORMAT_EN = "yyyy/MM/dd HH:mm:ss";
-
-    public static final String DATE_TIME_FORMAT_CN = "yyyy年MM月dd日 HH:mm";
-
-    public static final String DATE_TIME_FORMAT_CN_1 = "yyyy年MM月dd日 HH时mm分";
-
-    public static final String DATE_TIME_FORMAT_CN_2 = "yyyy年MM月dd日 HH时mm分ss秒";
-
-    public static final String DATE_TIME_FORMAT_1 = "yyyy-MM-dd HH:mm";
-
-    public static final String TIME_FORMAT = "HH:mm";
-
-    public static final String MONTH_DAY_FORMAT = "MM-dd";
-
-    public static final String MONTH_DAY_FORMAT_CN = "MM月dd日";
-
-    public static final String MONTH_DAY_FORMAT_EN = "MMdd";
-
-    public static final String YEAR_MONTH_FORMAT = "yyyy-MM";
-
-    public static final String YEAR_MONTH_FORMAT_CN = "yyyy年MM月";
-
-    public static final String YEAR_MONTH_FORMAT_EN = "yyyyMM";
-
-    public static final long DAY_MILLISECONDS = 86400000L;
-
+    /**
+     * Number of milliseconds in a standard second.
+     */
+    public static final long MILLIS_PER_SECOND = 1000;
 
     /**
-     * 获取当前日期
-     *
-     * @return
+     * Number of milliseconds in a standard minute.
      */
-    public static Date now() {
-        return new Date();
-    }
+    public static final long MILLIS_PER_MINUTE = 60 * MILLIS_PER_SECOND;
 
     /**
-     * 日期转成默认格式 yyyy-MM-dd
-     *
-     * @param date
-     * @return
+     * Number of milliseconds in a standard hour.
      */
-    public static String toDateString(Date date) {
-        return toString(date, DATE_FORMAT);
-    }
-
-    public static String toDateTimeString(Date date) {
-        return toString(date, DATE_TIME_FORMAT);
-    }
+    public static final long MILLIS_PER_HOUR = 60 * MILLIS_PER_MINUTE;
 
     /**
-     * 时间戳转成默认格式 yyyy-MM-dd
-     *
-     * @param timestamp
-     * @return
+     * Number of milliseconds in a standard day.
      */
-    public static String toDateString(long timestamp) {
-        return toString(new Date(timestamp), DATE_FORMAT);
-    }
-
+    public static final long MILLIS_PER_DAY = 24 * MILLIS_PER_HOUR;
 
     /**
-     * 日期转成指定格式
-     *
-     * @param date
-     * @param format
-     * @return
+     * 1-12月，每月的天数，实际使用已处理闰年的情况
      */
-    public static String toString(Date date, String format) {
-        if (date == null || format == null) {
-            return null;
-        }
+    private static final int[] MONTH_LENGTH = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-        return createDateFormat(format).format(date);
-    }
-
-    /**
-     * 时间戳转成默认格式 yyyy-MM-dd
-     *
-     * @param timestamp
-     * @param format
-     * @return
-     */
-    public static String toString(long timestamp, String format) {
-        return toString(new Date(timestamp), format);
-    }
-
-    /**
-     * 日期格式化
-     *
-     * @param format
-     * @return
-     */
-    private static DateFormat createDateFormat(String format) {
-        return new SimpleDateFormat(format, Locale.SIMPLIFIED_CHINESE);
-    }
-
-    /**
-     * yyyy-MM-dd 字符串转化成日期
-     *
-     * @param dateText
-     * @return
-     */
-    public static Date toDate(String dateText) throws ParseException {
-        return toDate(dateText, DATE_FORMAT);
-
-    }
-
-    /**
-     * 转换成sqlDate
-     *
-     * @param date
-     * @return
-     */
-    public static java.sql.Date toSqlDate(Date date) {
-        if (date == null) {
-            return null;
-        }
-        return new java.sql.Date(date.getTime());
-    }
-
-    /**
-     * 转换成utilDate
-     *
-     * @param date
-     * @return
-     */
-    public static Date toUtildate(java.sql.Date date) {
-        if (date == null) {
-            return null;
-        }
-        return new Date(date.getTime());
-    }
-
-    /**
-     * 指定格式化方式，将字符串转化成日期
-     *
-     * @param dateText
-     * @param format
-     * @return
-     */
-    public static Date toDate(String dateText, String format) throws ParseException {
-        DateFormat dateFormat = createDateFormat(format);
-        return dateFormat.parse(dateText);
-    }
-
-    /**
-     * 判断当前日是不是周末
-     *
-     * @param date
-     * @throws ParseException
-     * @author
-     */
-    public static boolean isWeekend(Date date) throws ParseException {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        return cal.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY;
-    }
+    //////// 日期比较 ///////////
 
     /**
      * 判断当前日是否是今天
      * 只判断年月日，不考虑时分秒
      *
-     * @param date
-     * @return
+     * @see org.apache.commons.lang3.time.DateUtils#isSameDay(Date, Date)
      */
-    public static boolean isToday(Date date) {
-        if (date == null) {
-            return false;
+    public static boolean isToday(final Date date) {
+        return org.apache.commons.lang3.time.DateUtils.isSameDay(date, new Date());
+    }
+
+    /**
+     * 是否同一天.
+     *
+     * @see org.apache.commons.lang3.time.DateUtils#isSameDay(Date, Date)
+     */
+    public static boolean isSameDay(final Date date1, final Date date2) {
+        return org.apache.commons.lang3.time.DateUtils.isSameDay(date1, date2);
+    }
+
+    /**
+     * 是否同一时刻.
+     */
+    public static boolean isSameTime(final Date date1, final Date date2) {
+        // date.getMillisOf() 比date.getTime()快
+        return date1.compareTo(date2) == 0;
+    }
+
+    /**
+     * 判断日期是否在范围内，包含相等的日期
+     */
+    public static boolean isBetween(final Date date, final Date start, final Date end) {
+        if (date == null || start == null || end == null || start.after(end)) {
+            throw new IllegalArgumentException("some date parameters is null or dateBein after dateEnd");
         }
-        String dateAsText = toDateString(date);
-        String todayAsText = toDateString(now());
-        return dateAsText.equals(todayAsText);
+        return !date.before(start) && !date.after(end);
     }
 
+    //////////// 往前往后滚动时间//////////////
+
     /**
-     * 计算两日期之间相差天数
-     *
-     * @param startDate
-     * @param endDate
-     * @return
+     * 加一月
      */
-    public static long daysBetween(Date startDate, Date endDate) throws ParseException {
-        DateFormat sdf = createDateFormat(DATE_FORMAT);
-        startDate = sdf.parse(sdf.format(startDate));
-        endDate = sdf.parse(sdf.format(endDate));
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(startDate);
-        long startTime = cal.getTimeInMillis();
-        cal.setTime(endDate);
-        long endTime = cal.getTimeInMillis();
-        return (endTime - startTime) / DAY_MILLISECONDS;
+    public static Date addMonths(final Date date, int amount) {
+        return org.apache.commons.lang3.time.DateUtils.addMonths(date, amount);
     }
 
     /**
-     * 调整天数
+     * 减一月
+     */
+    public static Date subMonths(final Date date, int amount) {
+        return org.apache.commons.lang3.time.DateUtils.addMonths(date, -amount);
+    }
+
+    /**
+     * 加一周
+     */
+    public static Date addWeeks(final Date date, int amount) {
+        return org.apache.commons.lang3.time.DateUtils.addWeeks(date, amount);
+    }
+
+    /**
+     * 减一周
+     */
+    public static Date subWeeks(final Date date, int amount) {
+        return org.apache.commons.lang3.time.DateUtils.addWeeks(date, -amount);
+    }
+
+    /**
+     * 加一天
+     */
+    public static Date addDays(final Date date, final int amount) {
+        return org.apache.commons.lang3.time.DateUtils.addDays(date, amount);
+    }
+
+    /**
+     * 减一天
+     */
+    public static Date subDays(final Date date, int amount) {
+        return org.apache.commons.lang3.time.DateUtils.addDays(date, -amount);
+    }
+
+    /**
+     * 加一小时
+     */
+    public static Date addHours(final Date date, int amount) {
+        return org.apache.commons.lang3.time.DateUtils.addHours(date, amount);
+    }
+
+    /**
+     * 减一小时
+     */
+    public static Date subHours(final Date date, int amount) {
+        return org.apache.commons.lang3.time.DateUtils.addHours(date, -amount);
+    }
+
+    /**
+     * 加一分钟
+     */
+    public static Date addMinutes(final Date date, int amount) {
+        return org.apache.commons.lang3.time.DateUtils.addMinutes(date, amount);
+    }
+
+    /**
+     * 减一分钟
+     */
+    public static Date subMinutes(final Date date, int amount) {
+        return org.apache.commons.lang3.time.DateUtils.addMinutes(date, -amount);
+    }
+
+    /**
+     * 终于到了，续一秒.
+     */
+    public static Date addSeconds(final Date date, int amount) {
+        return org.apache.commons.lang3.time.DateUtils.addSeconds(date, amount);
+    }
+
+    /**
+     * 减一秒.
+     */
+    public static Date subSeconds(final Date date, int amount) {
+        return org.apache.commons.lang3.time.DateUtils.addSeconds(date, -amount);
+    }
+
+    //////////// 直接设置时间//////////////
+
+    /**
+     * 设置年份, 公元纪年.
+     */
+    public static Date setYears(final Date date, int amount) {
+        return org.apache.commons.lang3.time.DateUtils.setYears(date, amount);
+    }
+
+    /**
+     * 设置月份, 0-11.
+     */
+    public static Date setMonths(final Date date, int amount) {
+        return org.apache.commons.lang3.time.DateUtils.setMonths(date, amount);
+    }
+
+    /**
+     * 设置日期, 1-31.
+     */
+    public static Date setDays(final Date date, int amount) {
+        return org.apache.commons.lang3.time.DateUtils.setDays(date, amount);
+    }
+
+    /**
+     * 设置小时, 0-23.
+     */
+    public static Date setHours(final Date date, int amount) {
+        return org.apache.commons.lang3.time.DateUtils.setHours(date, amount);
+    }
+
+    /**
+     * 设置分钟, 0-59.
+     */
+    public static Date setMinutes(final Date date, int amount) {
+        return org.apache.commons.lang3.time.DateUtils.setMinutes(date, amount);
+    }
+
+    /**
+     * 设置秒, 0-59.
+     */
+    public static Date setSeconds(final Date date, int amount) {
+        return org.apache.commons.lang3.time.DateUtils.setSeconds(date, amount);
+    }
+
+    /**
+     * 设置毫秒.
+     */
+    public static Date setMilliseconds(final Date date, int amount) {
+        return org.apache.commons.lang3.time.DateUtils.setMilliseconds(date, amount);
+    }
+
+    ///// 获取日期的位置//////
+
+    /**
+     * 获得日期是一周的第几天. 已改为中国习惯，1 是Monday，而不是Sundays.
+     */
+    public static int getDayOfWeek(final Date date) {
+        int result = getWithMondayFirst(date, Calendar.DAY_OF_WEEK);
+        return result == 1 ? 7 : result - 1;
+    }
+
+    /**
+     * 判断当前日期是否为周末
      *
      * @param date
-     * @param day  天数 ，支持负值
-     * @return
+     * @author
      */
-    public static Date addDay(Date date, int day) {
-        return addDate(date, Calendar.DATE, day);
+    public static boolean isWeekend(Date date) {
+        int dayOfWeek = getDayOfWeek(date);
+        return dayOfWeek == 6 || dayOfWeek == 7;
     }
 
     /**
-     * 调整时间
-     *
-     * @param date
-     * @param field
-     * @param amount
-     * @return
+     * 获得日期是一年的第几天，返回值从1开始
      */
-    public static Date addDate(Date date, int field, int amount) {
+    public static int getDayOfYear(final Date date) {
+        return get(date, Calendar.DAY_OF_YEAR);
+    }
+
+    /**
+     * 获得日期是一月的第几周，返回值从1开始.
+     * <p>
+     * 开始的一周，只要有一天在那个月里都算. 已改为中国习惯，1 是Monday，而不是Sunday
+     */
+    public static int getWeekOfMonth(final Date date) {
+        return getWithMondayFirst(date, Calendar.WEEK_OF_MONTH);
+    }
+
+    /**
+     * 获得日期是一年的第几周，返回值从1开始.
+     * <p>
+     * 开始的一周，只要有一天在那一年里都算.已改为中国习惯，1 是Monday，而不是Sunday
+     */
+    public static int getWeekOfYear(final Date date) {
+        return getWithMondayFirst(date, Calendar.WEEK_OF_YEAR);
+    }
+
+    private static int get(final Date date, int field) {
+        Validate.notNull(date, "The date must not be null");
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        cal.add(field, amount);
-        return cal.getTime();
+
+        return cal.get(field);
+    }
+
+    private static int getWithMondayFirst(final Date date, int field) {
+        Validate.notNull(date, "The date must not be null");
+        Calendar cal = Calendar.getInstance();
+        cal.setFirstDayOfWeek(Calendar.MONDAY);
+        cal.setTime(date);
+        return cal.get(field);
+    }
+
+    ///// 获得往前往后的日期//////
+
+    /**
+     * 2016-11-10 07:33:23, 则返回2016-1-1 00:00:00
+     */
+    public static Date beginOfYear(final Date date) {
+        return org.apache.commons.lang3.time.DateUtils.truncate(date, Calendar.YEAR);
+    }
+
+    /**
+     * 2016-11-10 07:33:23, 则返回2016-12-31 23:59:59.999
+     */
+    public static Date endOfYear(final Date date) {
+        return new Date(nextYear(date).getTime() - 1);
+    }
+
+    /**
+     * 2016-11-10 07:33:23, 则返回2017-1-1 00:00:00
+     */
+    public static Date nextYear(final Date date) {
+        return org.apache.commons.lang3.time.DateUtils.ceiling(date, Calendar.YEAR);
+    }
+
+    /**
+     * 2016-11-10 07:33:23, 则返回2016-11-1 00:00:00
+     */
+    public static Date beginOfMonth(final Date date) {
+        return org.apache.commons.lang3.time.DateUtils.truncate(date, Calendar.MONTH);
+    }
+
+    /**
+     * 2016-11-10 07:33:23, 则返回2016-11-30 23:59:59.999
+     */
+    public static Date endOfMonth(final Date date) {
+        return new Date(nextMonth(date).getTime() - 1);
+    }
+
+    /**
+     * 2016-11-10 07:33:23, 则返回2016-12-1 00:00:00
+     */
+    public static Date nextMonth(final Date date) {
+        return org.apache.commons.lang3.time.DateUtils.ceiling(date, Calendar.MONTH);
+    }
+
+    /**
+     * 2017-1-20 07:33:23, 则返回2017-1-16 00:00:00
+     */
+    public static Date beginOfWeek(final Date date) {
+        return org.apache.commons.lang3.time.DateUtils.truncate(DateUtils.subDays(date, DateUtils.getDayOfWeek(date) - 1), Calendar.DATE);
+    }
+
+    /**
+     * 2017-1-20 07:33:23, 则返回2017-1-22 23:59:59.999
+     */
+    public static Date endOfWeek(final Date date) {
+        return new Date(nextWeek(date).getTime() - 1);
+    }
+
+    /**
+     * 2017-1-23 07:33:23, 则返回2017-1-22 00:00:00
+     */
+    public static Date nextWeek(final Date date) {
+        return org.apache.commons.lang3.time.DateUtils.truncate(DateUtils.addDays(date, 8 - DateUtils.getDayOfWeek(date)), Calendar.DATE);
+    }
+
+    /**
+     * 2016-11-10 07:33:23, 则返回2016-11-10 00:00:00
+     */
+    public static Date beginOfDate(final Date date) {
+        return org.apache.commons.lang3.time.DateUtils.truncate(date, Calendar.DATE);
+    }
+
+    /**
+     * 2017-1-23 07:33:23, 则返回2017-1-23 23:59:59.999
+     */
+    public static Date endOfDate(final Date date) {
+        return new Date(nextDate(date).getTime() - 1);
+    }
+
+    /**
+     * 2016-11-10 07:33:23, 则返回2016-11-11 00:00:00
+     */
+    public static Date nextDate(final Date date) {
+        return org.apache.commons.lang3.time.DateUtils.ceiling(date, Calendar.DATE);
+    }
+
+    /**
+     * 2016-12-10 07:33:23, 则返回2016-12-10 07:00:00
+     */
+    public static Date beginOfHour(final Date date) {
+        return org.apache.commons.lang3.time.DateUtils.truncate(date, Calendar.HOUR_OF_DAY);
+    }
+
+    /**
+     * 2017-1-23 07:33:23, 则返回2017-1-23 07:59:59.999
+     */
+    public static Date endOfHour(final Date date) {
+        return new Date(nextHour(date).getTime() - 1);
+    }
+
+    /**
+     * 2016-12-10 07:33:23, 则返回2016-12-10 08:00:00
+     */
+    public static Date nextHour(final Date date) {
+        return org.apache.commons.lang3.time.DateUtils.ceiling(date, Calendar.HOUR_OF_DAY);
+    }
+
+    /**
+     * 2016-12-10 07:33:23, 则返回2016-12-10 07:33:00
+     */
+    public static Date beginOfMinute(final Date date) {
+        return org.apache.commons.lang3.time.DateUtils.truncate(date, Calendar.MINUTE);
+    }
+
+    /**
+     * 2017-1-23 07:33:23, 则返回2017-1-23 07:33:59.999
+     */
+    public static Date endOfMinute(final Date date) {
+        return new Date(nextMinute(date).getTime() - 1);
+    }
+
+    /**
+     * 2016-12-10 07:33:23, 则返回2016-12-10 07:34:00
+     */
+    public static Date nextMinute(final Date date) {
+        return org.apache.commons.lang3.time.DateUtils.ceiling(date, Calendar.MINUTE);
+    }
+
+    ////// 闰年及每月天数///////
+
+    /**
+     * 是否闰年.
+     */
+    public static boolean isLeapYear(final Date date) {
+        return isLeapYear(get(date, Calendar.YEAR));
+    }
+
+    /**
+     * 是否闰年，copy from Jodd Core的TimeUtil
+     * <p>
+     * 参数是公元计数, 如2016
+     */
+    public static boolean isLeapYear(int y) {
+        boolean result = false;
+
+        if (((y % 4) == 0) && // must be divisible by 4...
+                ((y < 1582) || // and either before reform year...
+                        ((y % 100) != 0) || // or not a century...
+                        ((y % 400) == 0))) { // or a multiple of 400...
+            result = true; // for leap year.
+        }
+        return result;
+    }
+
+    /**
+     * 获取某个月有多少天, 考虑闰年等因数, 移植Jodd Core的TimeUtil
+     */
+    public static int getMonthLength(final Date date) {
+        int year = get(date, Calendar.YEAR);
+        int month = get(date, Calendar.MONTH);
+        return getMonthLength(year, month);
+    }
+
+    /**
+     * 获取某个月有多少天, 考虑闰年等因数, 移植Jodd Core的TimeUtil
+     */
+    public static int getMonthLength(int year, int month) {
+
+        if ((month < 1) || (month > 12)) {
+            throw new IllegalArgumentException("Invalid month: " + month);
+        }
+        if (month == 2) {
+            return isLeapYear(year) ? 29 : 28;
+        }
+
+        return MONTH_LENGTH[month];
     }
 }

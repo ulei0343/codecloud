@@ -1,7 +1,7 @@
 package club.codecloud.demo.task;
 
 import club.codecloud.base.util.net.HttpUtils;
-import club.codecloud.base.util.time.DateUtils;
+import club.codecloud.base.util.time.DateFormatUtils;
 import club.codecloud.demo.common.mail.MailClient;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -16,6 +16,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -66,7 +67,7 @@ public class GoldPriceQueryTask {
         String data = HttpUtils.post(QUERY_URL, QUERY_PARAMS);
         JSONObject result = JSON.parseObject(data);
 
-        String nowTime = DateUtils.toString(DateUtils.now(), DateUtils.TIME_FORMAT);
+        String nowTime = DateFormatUtils.formatDate(DateFormatUtils.TIME_FORMAT, new Date());
         JSONArray times = result.getJSONArray("times");
         int index = -1;
         for (int i = 0; i < times.size(); i++) {
