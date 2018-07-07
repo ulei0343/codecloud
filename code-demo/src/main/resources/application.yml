@@ -1,6 +1,23 @@
 server:
   port: 8080
-
 encrypt:
   key: Hd5+dZ7ZHijwcA/ZmnSQBg==
   debug: false
+spring:
+  application:
+    name: code-demo
+  mail:
+    host: smtp.exmail.qq.com
+    username: admin@codecloud.club
+    password: oMZ&KSBIt%f^6ip9
+    defaultEncoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          connectiontimeout: 30000
+          timeout: 30000
+          writetimeout: 5000
+          auth: true
+          starttls:
+            enable: true
+            required: true

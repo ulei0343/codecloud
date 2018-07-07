@@ -7,7 +7,7 @@ public class User {
 
     private String name;
 
-//    @Range(min = 24L, max = 100, message = "请输入有效年龄")
+    @Range(min = 24L, max = 100, message = "请输入有效年龄")
     private Integer age;
 
     public String getName() {

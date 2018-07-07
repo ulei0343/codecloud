@@ -3,7 +3,6 @@ package club.codecloud.demo;
 
 import club.codecloud.base.config.encrypt.annotation.Decrypt;
 import club.codecloud.base.config.encrypt.annotation.Encrypt;
-import club.codecloud.base.constant.ResultCode;
 import club.codecloud.base.util.base.Result;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +23,7 @@ public class DemoController {
 
     @GetMapping("/get")
     public Object getInfo() {
-//        return Result.success("成功");
-        Integer.valueOf("chengogn");
-        return Result.error(ResultCode.PARAMETER_ERROR, "出错了");
+        return Result.success("成功");
     }
 
 
