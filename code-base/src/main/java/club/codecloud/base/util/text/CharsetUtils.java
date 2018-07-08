@@ -68,13 +68,11 @@ public class CharsetUtils {
      */
     public static String convert(String source, Charset srcCharset, Charset destCharset) {
         if (null == srcCharset) {
-            srcCharset = StandardCharsets.ISO_8859_1;
+            srcCharset = CHARSET_ISO_8859_1;
         }
-
         if (null == destCharset) {
-            srcCharset = StandardCharsets.UTF_8;
+            srcCharset = CHARSET_UTF_8;
         }
-
         if (StringUtils.isBlank(source) || srcCharset.equals(destCharset)) {
             return source;
         }
