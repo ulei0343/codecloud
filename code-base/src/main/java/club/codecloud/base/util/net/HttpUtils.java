@@ -48,9 +48,14 @@ public class HttpUtils {
     private static final Logger logger = LoggerFactory.getLogger(HttpUtils.class);
 
     /**
-     * 默认超时时间
+     * 默认连接超时时间
      */
-    private static final int DEFAULT_TIME_OUT = 3 * 1000;
+    private static final int DEFAULT_CONNECT_TIME_OUT = 3 * 1000;
+
+    /**
+     * 默认socket超时时间
+     */
+    private static final int DEFAULT_SOCKET_TIME_OUT = 30 * 1000;
 
     /**
      * 最大header数量
@@ -93,7 +98,7 @@ public class HttpUtils {
         // Create socket configuration
         SocketConfig socketConfig = SocketConfig.custom()
                 // 设置socket 超时时间
-                .setSoTimeout(DEFAULT_TIME_OUT)
+                .setSoTimeout(DEFAULT_CONNECT_TIME_OUT)
                 .build();
         connManager.setDefaultSocketConfig(socketConfig);
 
@@ -180,7 +185,7 @@ public class HttpUtils {
     }
 
     public static String get(String url, Map<String, String> params) {
-        return get(url, DEFAULT_TIME_OUT, null, params, StandardCharsets.UTF_8);
+        return get(url, DEFAULT_CONNECT_TIME_OUT, null, params, StandardCharsets.UTF_8);
     }
 
     public static String get(String url) {
@@ -207,7 +212,7 @@ public class HttpUtils {
         HttpGet httpGet = new HttpGet(requestUrl);
 
         RequestConfig requestConfig = RequestConfig.custom()
-                .setSocketTimeout(timeout)
+                .setSocketTimeout(DEFAULT_SOCKET_TIME_OUT)
                 .setConnectTimeout(timeout)
                 .setConnectionRequestTimeout(timeout)
                 .build();
@@ -225,7 +230,7 @@ public class HttpUtils {
     }
 
     public static String post(String url, Map<String, String> params) {
-        return post(url, DEFAULT_TIME_OUT, null, params, StandardCharsets.UTF_8);
+        return post(url, DEFAULT_CONNECT_TIME_OUT, null, params, StandardCharsets.UTF_8);
     }
 
     /**
@@ -270,7 +275,7 @@ public class HttpUtils {
         httpPost.setEntity(formEntity);
 
         RequestConfig requestConfig = RequestConfig.custom()
-                .setSocketTimeout(timeout)
+                .setSocketTimeout(DEFAULT_SOCKET_TIME_OUT)
                 .setConnectTimeout(timeout)
                 .setConnectionRequestTimeout(timeout)
                 .setExpectContinueEnabled(false).build();

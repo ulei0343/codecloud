@@ -18,7 +18,7 @@ import java.util.List;
  * 
  * InetAddress与String的转换其实消耗不小，如果是有限的地址，建议进行缓存.
  */
-public class IPUtil {
+public class IPUtils {
 
 	/**
 	 * 从InetAddress转化到int, 传输和存储时, 用int代表InetAddress是最小的开销.
