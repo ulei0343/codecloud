@@ -18,7 +18,7 @@
 
 > 定时任务服务模块
 
-#### code-task-finance
+#### code-task
 
-- 金融服务定时任务
+- 定时任务
 

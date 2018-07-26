@@ -1,4 +1,4 @@
-package club.codecloud.task.finance;
+package club.codecloud.task;
 
 import com.netflix.hystrix.contrib.metrics.eventstream.HystrixMetricsStreamServlet;
 import org.springframework.boot.WebApplicationType;
@@ -15,7 +15,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @author ulei
  * @date 2018/4/12
  */
-@EnableFeignClients(basePackages = "club.codecloud.task.finance.client")
+@EnableFeignClients(basePackages = "club.codecloud.task.client")
 @ComponentScan(basePackages = "club.codecloud")
 @EnableHystrixDashboard
 @EnableScheduling

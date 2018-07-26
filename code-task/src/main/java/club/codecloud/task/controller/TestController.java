@@ -1,6 +1,6 @@
-package club.codecloud.task.finance.controller;
+package club.codecloud.task.controller;
 
-import club.codecloud.task.finance.client.MailClient;
+import club.codecloud.task.client.MailClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

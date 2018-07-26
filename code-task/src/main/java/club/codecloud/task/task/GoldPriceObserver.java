@@ -1,4 +1,4 @@
-package club.codecloud.task.finance.task;
+package club.codecloud.task.task;
 
 import java.math.BigDecimal;
 import java.util.Observable;

@@ -1,6 +1,6 @@
 spring:
   application:
-    name: task-finance
+    name: task
   cloud:
     config:
       profile: dev
