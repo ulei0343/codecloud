@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="club.codecloud.message.service.dao.SmsDao">
+    <resultMap id="BaseResultMap" type="club.codecloud.message.entity.SmsDO">
+        <result column="id" property="id" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, username
+    </sql>
+    <insert id="insert">
+        INSERT INTO sms(`cellphone`, `content`) VALUES ('13366868447', 'test');
+    </insert>
+
+</mapper>

@@ -40,7 +40,7 @@ public class MailClient {
             message.setTo(to);
             message.setSubject(title);
             message.setText(content);
-            mailSender.send(message);
+//            mailSender.send(message);
             logger.info("send mail to [{}] success", to);
         } catch (MailException e) {
             logger.error("send mail to [{}] error", to, e);

@@ -20,7 +20,7 @@ public class MailServiceImpl implements MailService {
 
     @Override
     public void send(String content) {
-        Integer.valueOf("error");
+//        Integer.valueOf("error");
         logger.info("消息队列已接收：" + content);
         rabbitmqTemplate.convertAndSend("mail", content);
     }
