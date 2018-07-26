@@ -11,7 +11,7 @@ import java.util.Date;
 
 public class TimeServerHandler extends ChannelHandlerAdapter {
 
-    @Override
+//    @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         ByteBuf buf = (ByteBuf) msg;
         byte[] request = new byte[buf.readableBytes()];
@@ -25,7 +25,7 @@ public class TimeServerHandler extends ChannelHandlerAdapter {
 
     }
 
-    @Override
+//    @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
         ctx.flush();
     }

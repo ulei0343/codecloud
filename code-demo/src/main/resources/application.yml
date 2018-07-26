@@ -28,7 +28,34 @@ spring:
     database: 0
     jedis:
       pool:
-        max-active: 500
+        max-active: 1000
         max-idle: 200
         min-idle: 50
         max-wait: 1000
+  datasource:
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://192.168.1.81:3308/p2p_tempdb?useUnicode=true&amp;characterEncoding=utf8&allowMultiQueries=true&amp;autoReconnect=true&amp;zeroDateTimeBehavior=convertToNull&useSSL=false
+      username: operation_w
+      password: hzoper@12ation
+      type: com.alibaba.druid.pool.DruidDataSource
+      maxActive: 1000
+      initialSize: 10
+      maxWait: 3000
+      minIdle: 50
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxOpenPreparedStatements: 100
+      stat-view-servlet:
+        enabled: true
+        login-username: admin
+        login-password: admin
+        allow:
+mybatis:
+  type-aliases-package: club.codecloud.demo.entity
+  mapper-locations: classpath:mapper/*.xml

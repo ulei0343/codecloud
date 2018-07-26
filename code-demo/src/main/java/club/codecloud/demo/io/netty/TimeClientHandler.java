@@ -16,12 +16,12 @@ public class TimeClientHandler extends ChannelHandlerAdapter {
         firstMessage.writeBytes(request);
     }
 
-    @Override
+//    @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         ctx.writeAndFlush(firstMessage);
     }
 
-    @Override
+//    @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         ByteBuf buf = (ByteBuf) msg;
         byte[] response = new byte[buf.readableBytes()];
