@@ -14,7 +14,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 public class RedisConfig {
 
     @Autowired
-    StringRedisTemplate redisTemplate;
+    private StringRedisTemplate redisTemplate;
 
     @Bean
     public RedisUtils redisUtils() {
