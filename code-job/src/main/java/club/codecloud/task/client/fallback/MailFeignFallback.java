@@ -8,11 +8,11 @@ package club.codecloud.task.client.fallback;
  */
 
 import club.codecloud.message.api.service.fallback.MailServiceFallback;
-import club.codecloud.task.client.MailClient;
+import club.codecloud.task.client.MailFeign;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MailClientFallback extends MailServiceFallback implements MailClient {
+public class MailFeignFallback extends MailServiceFallback implements MailFeign {
     @Override
     public void send(String content) {
         System.out.println("异常降级");

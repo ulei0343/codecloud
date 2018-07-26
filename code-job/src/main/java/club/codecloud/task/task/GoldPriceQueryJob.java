@@ -2,7 +2,7 @@ package club.codecloud.task.task;
 
 import club.codecloud.base.util.net.HttpUtils;
 import club.codecloud.base.util.time.DateFormatUtils;
-import club.codecloud.task.client.MailClient;
+import club.codecloud.task.client.MailFeign;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -25,9 +25,9 @@ import java.util.concurrent.TimeUnit;
  * @date 2018/4/12
  */
 @Component
-public class GoldPriceQueryTask {
+public class GoldPriceQueryJob {
 
-    private static final Logger logger = LoggerFactory.getLogger(GoldPriceQueryTask.class);
+    private static final Logger logger = LoggerFactory.getLogger(GoldPriceQueryJob.class);
 
     /**
      * 查询地址
@@ -53,7 +53,7 @@ public class GoldPriceQueryTask {
     private static Cache<String, BigDecimal> cache = CacheBuilder.newBuilder().expireAfterWrite(12, TimeUnit.HOURS).build();
 
     @Autowired
-    MailClient mailClient;
+    MailFeign mailFeign;
 
     /**
      * 周一到周五，指定时间点，每分钟执行一次

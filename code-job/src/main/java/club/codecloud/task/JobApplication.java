@@ -20,9 +20,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableHystrixDashboard
 @EnableScheduling
 @SpringCloudApplication
-public class TaskApplication {
+public class JobApplication {
     public static void main(String[] args) {
-        new SpringApplicationBuilder(TaskApplication.class).web(WebApplicationType.SERVLET).run(args);
+        new SpringApplicationBuilder(JobApplication.class).web(WebApplicationType.SERVLET).run(args);
     }
 
     @Bean
