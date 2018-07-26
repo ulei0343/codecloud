@@ -21,3 +21,14 @@ spring:
           starttls:
             enable: true
             required: true
+  redis:
+    host: 192.168.1.103
+    port: 64454
+    password:
+    database: 0
+    jedis:
+      pool:
+        max-active: 500
+        max-idle: 200
+        min-idle: 50
+        max-wait: 1000
