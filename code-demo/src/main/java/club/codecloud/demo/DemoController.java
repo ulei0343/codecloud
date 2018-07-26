@@ -6,6 +6,7 @@ import club.codecloud.base.config.encrypt.annotation.Encrypt;
 import club.codecloud.base.util.base.Result;
 import club.codecloud.base.util.cache.RedisUtils;
 import club.codecloud.demo.dao.UserDao;
+import club.codecloud.demo.entity.UserDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -56,7 +57,7 @@ public class DemoController {
 
     @GetMapping("/listAllUser")
     public Object listAllUser(){
-        List<club.codecloud.demo.entity.User> userList = userDao.listAllUser();
+        List<UserDO> userList = userDao.listAllUser();
         return Result.success(userList);
     }
 }

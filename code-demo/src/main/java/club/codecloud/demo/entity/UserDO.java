@@ -4,7 +4,7 @@ package club.codecloud.demo.entity;
  * @author ulei
  * @date 2018/7/26
  */
-public class User {
+public class UserDO {
     private String id;
     private String username;
 

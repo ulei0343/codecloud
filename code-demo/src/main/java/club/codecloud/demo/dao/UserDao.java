@@ -1,6 +1,6 @@
 package club.codecloud.demo.dao;
 
-import club.codecloud.demo.entity.User;
+import club.codecloud.demo.entity.UserDO;
 
 import java.util.List;
 
@@ -9,5 +9,5 @@ import java.util.List;
  */
 public interface UserDao {
 
-    List<User> listAllUser();
+    List<UserDO> listAllUser();
 }
