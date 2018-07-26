@@ -1,7 +1,7 @@
-package club.codecloud.task.client.fallback;
+package club.codecloud.job.client.fallback;
 
 import club.codecloud.message.api.service.fallback.SmsServiceFallback;
-import club.codecloud.task.client.SmsFeign;
+import club.codecloud.job.client.SmsFeign;
 import org.springframework.stereotype.Component;
 
 @Component

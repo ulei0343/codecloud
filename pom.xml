@@ -8,7 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>code-message</module>
-        <module>code-task</module>
+        <module>code-job</module>
         <module>code-eureka-server</module>
         <module>code-base</module>
         <module>code-config-server</module>

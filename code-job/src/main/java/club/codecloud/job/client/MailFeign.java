@@ -1,7 +1,7 @@
-package club.codecloud.task.client;
+package club.codecloud.job.client;
 
 import club.codecloud.message.api.service.MailService;
-import club.codecloud.task.client.fallback.MailFeignFallback;
+import club.codecloud.job.client.fallback.MailFeignFallback;
 import org.springframework.cloud.openfeign.FeignClient;
 
 /**

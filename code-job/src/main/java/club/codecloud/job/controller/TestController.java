@@ -1,7 +1,7 @@
-package club.codecloud.task.controller;
+package club.codecloud.job.controller;
 
-import club.codecloud.task.client.MailFeign;
-import club.codecloud.task.client.SmsFeign;
+import club.codecloud.job.client.MailFeign;
+import club.codecloud.job.client.SmsFeign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

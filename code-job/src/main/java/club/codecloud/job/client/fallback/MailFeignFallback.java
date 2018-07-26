@@ -1,4 +1,4 @@
-package club.codecloud.task.client.fallback;
+package club.codecloud.job.client.fallback;
 
 /**
  * 降级策略
@@ -8,7 +8,7 @@ package club.codecloud.task.client.fallback;
  */
 
 import club.codecloud.message.api.service.fallback.MailServiceFallback;
-import club.codecloud.task.client.MailFeign;
+import club.codecloud.job.client.MailFeign;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,8 +1,8 @@
-package club.codecloud.task.task;
+package club.codecloud.job.job;
 
 import club.codecloud.base.util.net.HttpUtils;
 import club.codecloud.base.util.time.DateFormatUtils;
-import club.codecloud.task.client.MailFeign;
+import club.codecloud.job.client.MailFeign;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
