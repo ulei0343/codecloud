@@ -6,7 +6,7 @@ spring:
 logging:
   file: logs/hystrix-dashboard.log
 turbine:
-  app-config: JOB
+  app-config: job
   aggregator:
     cluster-config: default
   cluster-name-expression: new String("default")

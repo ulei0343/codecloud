@@ -19,7 +19,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @EnableFeignClients(basePackages = "club.codecloud.job.client")
 @ComponentScan(basePackages = "club.codecloud")
-//@EnableHystrixDashboard
+@EnableHystrixDashboard
 public class JobApplication {
     public static void main(String[] args) {
         new SpringApplicationBuilder(JobApplication.class).web(WebApplicationType.SERVLET).run(args);
