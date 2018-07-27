@@ -1,28 +1,25 @@
-package club.codecloud.job;
+package club.codecloud.hystrix;
 
 import com.netflix.hystrix.contrib.metrics.eventstream.HystrixMetricsStreamServlet;
 import org.springframework.boot.WebApplicationType;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
-import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
-import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.cloud.netflix.turbine.EnableTurbine;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author ulei
  * @date 2018/4/12
  */
-@SpringCloudApplication
-@EnableScheduling
-@EnableFeignClients(basePackages = "club.codecloud.job.client")
-@ComponentScan(basePackages = "club.codecloud")
-//@EnableHystrixDashboard
-public class JobApplication {
+@SpringBootApplication
+@EnableHystrixDashboard
+@EnableTurbine
+public class HystrixApplication {
+
     public static void main(String[] args) {
-        new SpringApplicationBuilder(JobApplication.class).web(WebApplicationType.SERVLET).run(args);
+        new SpringApplicationBuilder(HystrixApplication.class).web(WebApplicationType.SERVLET).run(args);
     }
 
     @Bean
@@ -30,7 +27,7 @@ public class JobApplication {
         HystrixMetricsStreamServlet hystrixMetricsStreamServlet = new HystrixMetricsStreamServlet();
         ServletRegistrationBean registrationBean = new ServletRegistrationBean(hystrixMetricsStreamServlet);
         registrationBean.setLoadOnStartup(1);
-        registrationBean.addUrlMappings("/actuator/hystrix.stream");
+        registrationBean.addUrlMappings("/hystrix.stream");
         registrationBean.setName("HystrixMetricsStreamServlet");
         return registrationBean;
     }

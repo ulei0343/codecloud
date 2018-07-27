@@ -13,6 +13,7 @@
         <module>code-base</module>
         <module>code-config-server</module>
         <module>code-demo</module>
+        <module>code-hystrix-dashboard</module>
     </modules>
     <packaging>pom</packaging>
 
