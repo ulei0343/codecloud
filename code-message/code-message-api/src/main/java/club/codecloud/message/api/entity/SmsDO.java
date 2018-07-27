@@ -1,4 +1,4 @@
-package club.codecloud.message.entity;
+package club.codecloud.message.api.entity;
 
 public class SmsDO {
     private int id;
