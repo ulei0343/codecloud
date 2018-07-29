@@ -14,6 +14,7 @@
         <module>code-config-server</module>
         <module>code-demo</module>
         <module>code-hystrix-dashboard</module>
+        <module>code-zuul</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -1,8 +1,0 @@
-server:
-  port: 9002
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    service-url:
-      defaultZone: http://140.143.25.21:9001/eureka

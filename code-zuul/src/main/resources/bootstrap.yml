@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: zuul
+  cloud:
+    config:
+      profile: dev
+      label: master
+      uri: http://140.143.25.21:20501
+      fail-fast: true
+      retry:
+        # 最大重试次数
+        max-attempts: 3
