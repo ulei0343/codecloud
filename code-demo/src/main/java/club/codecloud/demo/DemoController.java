@@ -7,6 +7,7 @@ import club.codecloud.base.util.base.Result;
 import club.codecloud.base.util.cache.RedisUtils;
 import club.codecloud.demo.dao.UserDao;
 import club.codecloud.demo.entity.UserDO;
+import club.codecloud.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -53,11 +54,12 @@ public class DemoController {
     }
 
     @Autowired
-    private UserDao userDao;
+    private UserService userService;
+
 
     @GetMapping("/listAllUser")
     public Object listAllUser(){
-        List<UserDO> userList = userDao.listAllUser();
+        List<UserDO> userList = userService.listAllUser();
         return Result.success(userList);
     }
 }

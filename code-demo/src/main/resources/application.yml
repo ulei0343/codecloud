@@ -59,3 +59,23 @@ spring:
 mybatis:
   type-aliases-package: club.codecloud.demo.entity
   mapper-locations: classpath:mapper/*.xml
+jetcache:
+  statIntervalMinutes: 15
+  areaInCacheName: false
+  local:
+    default:
+      type: linkedhashmap
+      keyConvertor: fastjson
+      limit: 100
+  remote:
+    default:
+      type: redis
+      keyConvertor: fastjson
+      valueEncoder: java
+      valueDecoder: java
+      poolConfig:
+        minIdle: 5
+        maxIdle: 20
+        maxTotal: 50
+      host: 192.168.1.103
+      port: 64454

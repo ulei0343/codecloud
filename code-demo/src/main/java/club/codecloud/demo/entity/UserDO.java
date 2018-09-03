@@ -1,10 +1,12 @@
 package club.codecloud.demo.entity;
 
+import java.io.Serializable;
+
 /**
  * @author ulei
  * @date 2018/7/26
  */
-public class UserDO {
+public class UserDO implements Serializable {
     private String id;
     private String username;
 

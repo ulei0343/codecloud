@@ -69,6 +69,14 @@
             <version>3.7</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.alicp.jetcache/jetcache-redis -->
+        <dependency>
+            <groupId>com.alicp.jetcache</groupId>
+            <artifactId>jetcache-starter-redis</artifactId>
+            <version>2.5.6</version>
+        </dependency>
+
+
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
