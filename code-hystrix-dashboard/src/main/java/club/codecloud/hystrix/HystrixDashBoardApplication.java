@@ -16,10 +16,10 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 @EnableHystrixDashboard
 @EnableTurbine
-public class HystrixApplication {
+public class HystrixDashBoardApplication {
 
     public static void main(String[] args) {
-        new SpringApplicationBuilder(HystrixApplication.class).web(WebApplicationType.SERVLET).run(args);
+        new SpringApplicationBuilder(HystrixDashBoardApplication.class).web(WebApplicationType.SERVLET).run(args);
     }
 
     @Bean

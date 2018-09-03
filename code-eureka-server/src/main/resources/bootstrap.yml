@@ -1,6 +1,6 @@
 spring:
   application:
-    name: message
+    name: eureka-server
   cloud:
     config:
       profile: dev

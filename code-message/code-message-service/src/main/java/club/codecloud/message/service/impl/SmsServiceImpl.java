@@ -8,8 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.concurrent.TimeUnit;
-
 @RestController
 public class SmsServiceImpl implements SmsService {
     private final static Logger logger = LoggerFactory.getLogger(SmsServiceImpl.class);
@@ -23,7 +21,10 @@ public class SmsServiceImpl implements SmsService {
     @Override
     public void send(String content) {
         logger.info("短信已接收：" + content);
-        redisUtils.setEx("123",content,1, TimeUnit.MINUTES);
+//        redisUtils.setEx("123",content,1, TimeUnit.MINUTES);
+        Integer.valueOf(content);
+
+
         smsDao.insert();
     }
 }

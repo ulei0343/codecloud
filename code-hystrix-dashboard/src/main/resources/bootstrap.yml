@@ -1,6 +1,6 @@
 spring:
   application:
-    name: message
+    name: hystrix-dashboard
   cloud:
     config:
       profile: dev
