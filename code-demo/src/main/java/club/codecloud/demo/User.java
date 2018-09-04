@@ -2,8 +2,6 @@ package club.codecloud.demo;
 
 import org.hibernate.validator.constraints.Range;
 
-import java.time.Duration;
-
 public class User {
 
 
@@ -28,8 +26,4 @@ public class User {
         this.age = age;
     }
 
-    public static void main(String[] args) {
-        Duration duration = Duration.ofMillis(-1);
-        System.out.println(duration.getSeconds());
-    }
 }
