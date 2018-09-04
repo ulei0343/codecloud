@@ -2,17 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="club.codecloud.demo.dao.UserDao">
     <resultMap id="BaseResultMap" type="club.codecloud.demo.entity.UserDO">
-        <result column="id" property="id" />
-        <result column="username" property="username" />
+        <result column="id" property="id"/>
+        <result column="username" property="username"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id, username
     </sql>
-    <select id="listAllUser" resultMap="BaseResultMap" >
+    <select id="listAllUser" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from user
+    </select>
+
+    <insert id="insert" parameterType="club.codecloud.demo.entity.UserDO" keyProperty="id" useGeneratedKeys="true">
+        insert into user(username) values (#{username})
+    </insert>
+
+    <delete id="deleteById">
+        update user set is_del=1 where id=#{id}
+    </delete>
+
+    <update id="updateById">
+        update user set username=#{username} where id=#{id}
+    </update>
+
+    <select id="selectById" resultType="club.codecloud.demo.entity.UserDO">
+        select id,username from user where id=#{id}
     </select>
 
 </mapper>

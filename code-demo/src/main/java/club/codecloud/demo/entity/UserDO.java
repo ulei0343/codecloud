@@ -1,12 +1,12 @@
 package club.codecloud.demo.entity;
 
-import java.io.Serializable;
+import club.codecloud.base.common.entity.BaseDO;
 
 /**
  * @author ulei
  * @date 2018/7/26
  */
-public class UserDO implements Serializable {
+public class UserDO extends BaseDO {
     private String id;
     private String username;
 

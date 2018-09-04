@@ -1,23 +1,15 @@
 package club.codecloud.base.common.dao;
 
-import java.util.List;
+import java.io.Serializable;
 
 public interface BaseDao<T> {
 
+    int insert(T t);
 
-    int add(T t);
+    int deleteById(Serializable id);
 
-    int addBatch(List<T> list);
+    int updateById(T t);
 
-    int update(T t);
+    T selectById(Serializable id);
 
-    int updateBySelective(T t);
-
-    int delete(Object id);
-
-    int queryCount(T t);
-
-    List<T> queryList(T t);
-
-    T queryById(Object id);
 }

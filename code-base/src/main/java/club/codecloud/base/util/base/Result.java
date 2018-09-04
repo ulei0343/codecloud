@@ -24,6 +24,11 @@ public final class Result implements Serializable {
         this.msg = resultCode.getMessage();
     }
 
+    private Result(ResultCode resultCode, String errorMsg) {
+        this.code = resultCode.getCode();
+        this.msg = errorMsg;
+    }
+
     private Result(ResultCode resultCode, Object data) {
         this.code = resultCode.getCode();
         this.msg = resultCode.getMessage();
@@ -48,6 +53,10 @@ public final class Result implements Serializable {
 
     public static Result error(ResultCode resultCode) {
         return new Result(resultCode);
+    }
+
+    public static Result error(ResultCode resultCode, String errorMsg) {
+        return new Result(resultCode, errorMsg);
     }
 
     public static Result error(ResultCode resultCode, Object data) {

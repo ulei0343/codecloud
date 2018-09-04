@@ -2,7 +2,7 @@ package club.codecloud.base.constant;
 
 public enum ResultCode {
 
-    SUCCESS(0, "ok"),
+    SUCCESS(200, "ok"),
     DEFAULT_ERROR(10000, "系统忙，请稍后再试"),
     PARAMETER_ERROR(10001, "参数错误");
 

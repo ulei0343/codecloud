@@ -5,15 +5,11 @@ import club.codecloud.base.config.encrypt.annotation.Decrypt;
 import club.codecloud.base.config.encrypt.annotation.Encrypt;
 import club.codecloud.base.util.base.Result;
 import club.codecloud.base.util.cache.RedisUtils;
-import club.codecloud.demo.dao.UserDao;
-import club.codecloud.demo.entity.UserDO;
-import club.codecloud.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequestMapping("/demo")
@@ -40,26 +36,16 @@ public class DemoController {
     }
 
 
-
-
     @Autowired
     private RedisUtils redisUtils;
 
     @GetMapping("/redis")
-    public String redis(){
+    public String redis() {
         String key = "test";
-        redisUtils.set(key,"test");
+        redisUtils.set(key, "test");
         System.out.println(redisUtils.get(key));
         return "ok";
     }
 
-    @Autowired
-    private UserService userService;
 
-
-    @GetMapping("/listAllUser")
-    public Object listAllUser(){
-        List<UserDO> userList = userService.listAllUser();
-        return Result.success(userList);
-    }
 }
