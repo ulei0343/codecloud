@@ -79,3 +79,4 @@ jetcache:
         maxTotal: 50
       host: 192.168.1.103
       port: 64454
+      database: 0
