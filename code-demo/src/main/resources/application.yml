@@ -31,7 +31,7 @@ spring:
         max-active: 1000
         max-idle: 200
         min-idle: 50
-        max-wait: 1000
+        max-wait: 1s
   datasource:
     druid:
       driver-class-name: com.mysql.jdbc.Driver
@@ -64,9 +64,10 @@ jetcache:
   areaInCacheName: false
   local:
     default:
-      type: linkedhashmap
+      type: caffeine
       keyConvertor: fastjson
       limit: 100
+      expireAfterWriteInMillis: 600000
   remote:
     default:
       type: redis

@@ -1,8 +1,13 @@
 package club.codecloud.demo;
 
 import club.codecloud.base.util.base.Result;
+import club.codecloud.base.util.number.RandomUtils;
 import club.codecloud.demo.entity.UserDO;
 import club.codecloud.demo.service.UserService;
+import com.alicp.jetcache.Cache;
+import com.alicp.jetcache.anno.CacheType;
+import com.alicp.jetcache.anno.CreateCache;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +21,9 @@ import java.util.List;
 @RequestMapping("user")
 @ResponseBody
 public class UserController {
+
+    @CreateCache(cacheType = CacheType.LOCAL, localExpire = 60)
+    private Cache<Integer, String> usernameCache;
 
     @Autowired
     private UserService userService;
@@ -42,6 +50,16 @@ public class UserController {
     @GetMapping("{id}/name")
     public Object selectNameById(@PathVariable("id") Integer id) {
         String username = userService.selectNameById(id);
+        return Result.success(username);
+    }
+
+    @GetMapping("{id}/cname")
+    public Object selectNameByIdFromCache(@PathVariable("id") Integer id) {
+        String username = usernameCache.get(id);
+        if (StringUtils.isEmpty(username)) {
+            username = generateRandomUsername();
+            usernameCache.put(id, username);
+        }
         return Result.success(username);
     }
 
@@ -79,6 +97,12 @@ public class UserController {
     public Object update(UserDO userDO) {
         userService.updateNameById(userDO);
         return Result.success(null);
+    }
+
+    private String generateRandomUsername() {
+        String username = RandomUtils.randomStringFixLength(8);
+        System.out.println("generateRandomUsername" + username);
+        return username;
     }
 
 
