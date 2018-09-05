@@ -22,7 +22,7 @@ import java.util.List;
 @ResponseBody
 public class UserController {
 
-    @CreateCache(cacheType = CacheType.LOCAL, localExpire = 60)
+    @CreateCache(cacheType = CacheType.LOCAL, expire = 5)
     private Cache<Integer, String> usernameCache;
 
     @Autowired
@@ -101,7 +101,7 @@ public class UserController {
 
     private String generateRandomUsername() {
         String username = RandomUtils.randomStringFixLength(8);
-        System.out.println("generateRandomUsername" + username);
+        System.out.println("generateRandomUsername:" + username);
         return username;
     }
 
