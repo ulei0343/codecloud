@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -54,7 +55,8 @@ public class UserController {
     }
 
     @GetMapping("{id}/cname")
-    public Object selectNameByIdFromCache(@PathVariable("id") Integer id) {
+    public Object selectNameByIdFromCache(@PathVariable("id") Integer id, HttpServletRequest request) {
+        System.out.println("selectNameByIdFromCache" + request.getParameter("id"));
         String username = usernameCache.get(id);
         if (StringUtils.isEmpty(username)) {
             username = generateRandomUsername();
