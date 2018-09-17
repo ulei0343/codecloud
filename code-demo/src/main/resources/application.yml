@@ -6,6 +6,10 @@ encrypt:
 spring:
   application:
     name: code-demo
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: non_null
   mail:
     host: smtp.exmail.qq.com
     username: admin@codecloud.club

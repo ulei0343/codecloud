@@ -4,6 +4,7 @@
     <resultMap id="BaseResultMap" type="club.codecloud.demo.entity.UserDO">
         <result column="id" property="id"/>
         <result column="username" property="username"/>
+        <result column="birthday" property="birthday" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -16,7 +17,7 @@
     </select>
 
     <insert id="insert" parameterType="club.codecloud.demo.entity.UserDO" keyProperty="id" useGeneratedKeys="true">
-        insert into user(username) values (#{username})
+        insert into user(username,birthday) values (#{username},#{birthday})
     </insert>
 
     <delete id="deleteById">
@@ -24,11 +25,11 @@
     </delete>
 
     <update id="updateById">
-        update user set username=#{username} where id=#{id}
+        update user set username=#{username},birthday=#{birthday} where id=#{id}
     </update>
 
     <select id="selectById" resultType="club.codecloud.demo.entity.UserDO">
-        select id,username from user where id=#{id}
+        select id,username,birthday from user where id=#{id}
     </select>
 
 </mapper>

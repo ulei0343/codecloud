@@ -3,11 +3,14 @@ package club.codecloud.demo;
 import club.codecloud.base.util.base.Result;
 import club.codecloud.base.util.number.RandomUtils;
 import club.codecloud.demo.entity.UserDO;
+import club.codecloud.demo.entity.UserRequest;
+import club.codecloud.demo.entity.UserResponse;
 import club.codecloud.demo.service.UserService;
 import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;
 import com.alicp.jetcache.anno.CreateCache;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +33,7 @@ public class UserController {
 
 
     @GetMapping("/listAllUser")
-    public Object listAllUser() {
+    public Result listAllUser() {
         List<UserDO> userList = userService.listAllUser();
         return Result.success(userList);
     }
@@ -42,19 +45,21 @@ public class UserController {
      * @return
      */
     @GetMapping("{id}")
-    public Object selectById(@PathVariable("id") Integer id) {
+    public Result selectById(@PathVariable("id") Integer id) {
         UserDO userDO = userService.selectById(id);
-        return Result.success(userDO);
+        UserResponse userResponse = new UserResponse();
+        BeanUtils.copyProperties(userDO, userResponse);
+        return Result.success(userResponse);
     }
 
     @GetMapping("{id}/name")
-    public Object selectNameById(@PathVariable("id") Integer id) {
+    public Result selectNameById(@PathVariable("id") Integer id) {
         String username = userService.selectNameById(id);
         return Result.success(username);
     }
 
     @GetMapping("{id}/cname")
-    public Object selectNameByIdFromCache(@PathVariable("id") Integer id) {
+    public Result selectNameByIdFromCache(@PathVariable("id") Integer id) {
         String username = usernameCache.get(id);
         if (StringUtils.isEmpty(username)) {
             username = generateRandomUsername();
@@ -70,7 +75,7 @@ public class UserController {
      * @return
      */
     @DeleteMapping("{id}")
-    public Object delete(@PathVariable("id") String id) {
+    public Result delete(@PathVariable("id") String id) {
         userService.deleteById(id);
         return Result.success(null);
     }
@@ -78,25 +83,29 @@ public class UserController {
     /**
      * 保存某个ID的信息
      *
-     * @param userDO
+     * @param userRequest
      * @return
      */
     @PostMapping
-    public Object insert(UserDO userDO) {
+    public Result insert(UserRequest userRequest) {
+        UserDO userDO = new UserDO();
+        BeanUtils.copyProperties(userRequest, userDO);
         userService.insert(userDO);
-        return Result.success(null);
+        return Result.success(userDO.getId());
     }
 
     /**
      * 跟新某个ID的信息
      *
-     * @param userDO
+     * @param userRequest
      * @return
      */
     @PutMapping("{id}")
-    public Object update(UserDO userDO) {
+    public Result update(UserRequest userRequest) {
+        UserDO userDO = new UserDO();
+        BeanUtils.copyProperties(userRequest, userDO);
         userService.updateNameById(userDO);
-        return Result.success(null);
+        return Result.success("ok");
     }
 
     private String generateRandomUsername() {

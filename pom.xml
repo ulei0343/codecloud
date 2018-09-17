@@ -26,7 +26,10 @@
         <spring-cloud.version>Finchley.RC1</spring-cloud.version>
         <guava.version>23.0</guava.version>
         <common-lang3.version>3.7</common-lang3.version>
-        <fastjson.version>1.2.47</fastjson.version>
+        <commons-io.version>2.6</commons-io.version>
+        <commons-collections.version>4.2</commons-collections.version>
+        <fastjson.version>1.2.49</fastjson.version>
+        <jackson.version>2.9.6</jackson.version>
 
     </properties>
 
@@ -57,9 +60,25 @@
                 <version>${fastjson.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${common-lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons-collections.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

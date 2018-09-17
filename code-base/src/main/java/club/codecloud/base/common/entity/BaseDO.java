@@ -7,4 +7,13 @@ import java.io.Serializable;
  * @date 2018/4/12
  */
 public class BaseDO implements Serializable {
+    Integer id;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 }

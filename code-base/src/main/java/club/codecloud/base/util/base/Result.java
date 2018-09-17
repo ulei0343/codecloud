@@ -6,11 +6,24 @@ import java.io.Serializable;
 
 /**
  * 封装统一响应消息体
+ *
+ * @author ulei
  */
 public final class Result implements Serializable {
 
+    /**
+     * 状态码
+     */
     private Integer code;
+
+    /**
+     * 错误信息
+     */
     private String msg;
+
+    /**
+     * 数据
+     */
     private Object data;
 
     private Result(Object data) {
@@ -27,12 +40,6 @@ public final class Result implements Serializable {
     private Result(ResultCode resultCode, String errorMsg) {
         this.code = resultCode.getCode();
         this.msg = errorMsg;
-    }
-
-    private Result(ResultCode resultCode, Object data) {
-        this.code = resultCode.getCode();
-        this.msg = resultCode.getMessage();
-        this.data = data;
     }
 
     public Integer getCode() {
@@ -58,10 +65,4 @@ public final class Result implements Serializable {
     public static Result error(ResultCode resultCode, String errorMsg) {
         return new Result(resultCode, errorMsg);
     }
-
-    public static Result error(ResultCode resultCode, Object data) {
-        return new Result(resultCode, data);
-    }
-
-
 }
