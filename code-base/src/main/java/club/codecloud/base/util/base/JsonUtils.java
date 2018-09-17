@@ -50,7 +50,23 @@ public class JsonUtils {
         try {
             return objectMapper.writeValueAsString(data);
         } catch (JsonProcessingException e) {
-            logger.error("JsonUtils parse Object to JsonString error", e);
+            logger.error("JsonUtils parse Object to Json error", e);
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 将对象转换成优雅的json字符串
+     *
+     * @param data
+     * @return
+     */
+    public static String toPrettyJson(Object data) {
+        try {
+            return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(data);
+        } catch (JsonProcessingException e) {
+            logger.error("JsonUtils parse Object to pretty Json error", e);
             e.printStackTrace();
         }
         return null;
@@ -68,7 +84,7 @@ public class JsonUtils {
         try {
             return objectMapper.readValue(data, beanType);
         } catch (IOException e) {
-            logger.error("JsonUtils parse JsonString to Object error", e);
+            logger.error("JsonUtils parse Json to Object error", e);
             e.printStackTrace();
         }
         return null;
@@ -86,7 +102,7 @@ public class JsonUtils {
         try {
             return objectMapper.readValue(data, objectMapper.getTypeFactory().constructParametricType(List.class, beanType));
         } catch (IOException e) {
-            logger.error("JsonUtils parse JsonString to List error", e);
+            logger.error("JsonUtils parse Json to List error", e);
         }
         return null;
     }
@@ -101,63 +117,8 @@ public class JsonUtils {
         try {
             return objectMapper.readValue(data, Map.class);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("JsonUtils parse Json to Map error", e);
         }
         return null;
-    }
-
-    public static class User {
-        private String name;
-        private Integer age;
-        private Boolean pass;
-
-        @JsonFormat(pattern = DateFormatUtils.DATE_TIME_FORMAT)
-        private Date birthday;
-
-        public User(String name, Integer age, Boolean pass, Date birthday) {
-            this.name = name;
-            this.age = age;
-            this.pass = pass;
-            this.birthday = birthday;
-        }
-
-        public User() {
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public Integer getAge() {
-            return age;
-        }
-
-        public Boolean getPass() {
-            return pass;
-        }
-
-        public Date getBirthday() {
-            return birthday;
-        }
-    }
-
-    public static void main(String[] args) {
-        User zhangsan = new User("zhangsan", 18, false, new Date());
-
-        String zhangJson = JsonUtils.toJson(zhangsan);
-        System.out.println(zhangJson);
-        User lisi = new User("lisi", null, false, null);
-        User wangwu = new User("wangwu", 21, true, null);
-
-        List<User> userList = Lists.newArrayList(zhangsan, lisi, wangwu);
-        String userListJson = JsonUtils.toJson(userList);
-        System.out.println(userListJson);
-
-        List<User> userList1 = JsonUtils.toList(userListJson, User.class);
-        System.out.println(userList1.size());
-
-        Map<String, Object> stringObjectMap = JsonUtils.toMap(zhangJson);
-        System.out.println(stringObjectMap.get("name"));
-
     }
 }
