@@ -98,16 +98,4 @@ public class FTPUtils {
         }
         return null;
     }
-
-    public static void main(String[] args) {
-        byte[] content = FTPUtils.download("111.203.205.28", 21, "M20000001943", "W2ed3m1943", "/2018/07/", "20180709_M20000001943_TRANSACTION.txt");
-        File file = new File("/Users/ulei/Desktop/ftpTest/20180709_M20000001943_TRANSACTION.txt");
-        try {
-            FileUtils.writeByteArrayToFile(file, content);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
 }
