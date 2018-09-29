@@ -45,7 +45,7 @@ public class UserController {
      * @return
      */
     @GetMapping("{id}")
-    public Result selectById(@PathVariable("id") Integer id) {
+    public Object selectById(@PathVariable("id") Integer id) {
         UserDO userDO = userService.selectById(id);
         UserResponse userResponse = new UserResponse();
         BeanUtils.copyProperties(userDO, userResponse);
@@ -53,13 +53,13 @@ public class UserController {
     }
 
     @GetMapping("{id}/name")
-    public Result selectNameById(@PathVariable("id") Integer id) {
+    public Object selectNameById(@PathVariable("id") Integer id) {
         String username = userService.selectNameById(id);
         return Result.success(username);
     }
 
     @GetMapping("{id}/cname")
-    public Result selectNameByIdFromCache(@PathVariable("id") Integer id) {
+    public Object selectNameByIdFromCache(@PathVariable("id") Integer id) {
         String username = usernameCache.get(id);
         if (StringUtils.isEmpty(username)) {
             username = generateRandomUsername();
@@ -75,7 +75,7 @@ public class UserController {
      * @return
      */
     @DeleteMapping("{id}")
-    public Result delete(@PathVariable("id") String id) {
+    public Object delete(@PathVariable("id") String id) {
         userService.deleteById(id);
         return Result.success(null);
     }
@@ -87,7 +87,7 @@ public class UserController {
      * @return
      */
     @PostMapping
-    public Result insert(UserRequest userRequest) {
+    public Object insert(UserRequest userRequest) {
         UserDO userDO = new UserDO();
         BeanUtils.copyProperties(userRequest, userDO);
         userService.insert(userDO);
@@ -101,7 +101,7 @@ public class UserController {
      * @return
      */
     @PutMapping("{id}")
-    public Result update(UserRequest userRequest) {
+    public Object update(UserRequest userRequest) {
         UserDO userDO = new UserDO();
         BeanUtils.copyProperties(userRequest, userDO);
         userService.updateNameById(userDO);

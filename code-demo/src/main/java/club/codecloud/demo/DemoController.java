@@ -24,14 +24,14 @@ public class DemoController {
 
 
     @GetMapping("/get")
-    public Result getInfo() {
+    public Object getInfo() {
         return Result.success("成功");
     }
 
 
     @PostMapping("/save")
     @Decrypt
-    public Result save(@RequestBody @Valid User user) {
+    public Object save(@RequestBody @Valid User user) {
         return Result.success(user.getName());
     }
 
