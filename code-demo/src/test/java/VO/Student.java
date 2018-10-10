@@ -1,3 +1,5 @@
+package VO;
+
 import org.apache.commons.lang3.ClassUtils;
 
 public class Student {
@@ -35,6 +37,11 @@ public class Student {
 
         String name = ClassUtils.getName(Student.class);
         System.out.println(name);
+
+        String packageName = ClassUtils.getPackageName(Student.class);
+        System.out.println(packageName);
+
+
 
     }
 }
