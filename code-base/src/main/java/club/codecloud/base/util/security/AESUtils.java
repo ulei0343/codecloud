@@ -144,17 +144,4 @@ public final class AESUtils {
         return new String(decrypt(dataBytes, keyBytes), StandardCharsets.UTF_8);
 
     }
-
-    public static void main(String[] args) throws UnsupportedEncodingException {
-        String key = AESUtils.getKey();
-        System.out.println("key:" + key);
-
-        String data = "world 欢迎你";
-        String encryptData = AESUtils.encrypt(data, key);
-        System.out.println("encryptData:" + encryptData);
-
-        String decryptData = AESUtils.decrypt(encryptData, key);
-        System.out.println("decryptData:" + decryptData);
-    }
-
 }

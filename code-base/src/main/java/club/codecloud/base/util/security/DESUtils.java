@@ -131,16 +131,4 @@ public final class DESUtils {
         // 执行操作
         return new String(decrypt(dataBytes, keyBytes), StandardCharsets.UTF_8);
     }
-
-    public static void main(String[] args) {
-        String key = DESUtils.getKey();
-        System.out.println("key:" + key);
-
-        String data = "world 欢迎你";
-        String encryptData = DESUtils.encrypt(data, key);
-        System.out.println("encryptData:" + encryptData);
-
-        String decryptData = DESUtils.decrypt(encryptData, key);
-        System.out.println("decryptData:" + decryptData);
-    }
 }

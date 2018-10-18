@@ -68,20 +68,4 @@ public final class RSASignature {
             throw new RuntimeException("RSASign验签错误，错误信息：", e);
         }
     }
-
-    public static void main(String[] args) {
-        KeyPair keyPair = RSAUtils.getKeyPair();
-        String publicKey = RSAUtils.getPublicKey(keyPair);
-        System.out.println(publicKey);
-        String privateKey = RSAUtils.getPrivateKey(keyPair);
-        System.out.println(privateKey);
-
-        String data = "world 欢迎你";
-        String sign = RSASignature.sign(data, privateKey);
-        System.out.println(sign);
-
-        boolean verify = RSASignature.verify(data, sign, publicKey);
-        System.out.println(verify);
-
-    }
 }

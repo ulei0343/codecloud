@@ -231,31 +231,4 @@ public final class RSAUtils {
             throw new RuntimeException("RSA解密出错", e);
         }
     }
-
-
-    public static void main(String[] args) {
-        KeyPair keyPair = RSAUtils.getKeyPair();
-        String publicKey = getPublicKey(keyPair);
-        System.out.println(publicKey);
-        String privateKey = getPrivateKey(keyPair);
-        System.out.println(privateKey);
-
-        String data = "world 欢迎你";
-
-        //公钥加密&私钥解密
-        String encryptData = RSAUtils.encryptByPublicKey(publicKey, data);
-        System.out.println(encryptData);
-
-        String decryptData = RSAUtils.decryptByPrivateKey(privateKey, encryptData);
-        System.out.println(decryptData);
-
-        //私钥加密&公钥解密
-        String encryptData1 = RSAUtils.encryptByPrivateKey(privateKey, data);
-        System.out.println(encryptData1);
-
-        String decryptData1 = RSAUtils.decryptByPublicKey(publicKey, encryptData1);
-        System.out.println(decryptData1);
-
-
-    }
 }

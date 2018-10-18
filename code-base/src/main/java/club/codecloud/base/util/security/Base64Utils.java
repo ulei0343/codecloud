@@ -71,13 +71,4 @@ public final class Base64Utils {
             throw new RuntimeException("Base64解密错误，错误信息：", e);
         }
     }
-
-
-    public static void main(String[] args) {
-        String encode = Base64Utils.encode("你好 world");
-        System.out.println(encode);
-
-        String decode = Base64Utils.decode(encode);
-        System.out.println(decode);
-    }
 }

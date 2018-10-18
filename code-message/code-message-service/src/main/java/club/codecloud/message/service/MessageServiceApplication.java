@@ -10,9 +10,9 @@ import org.springframework.scheduling.annotation.EnableAsync;
 /**
  * @author ulei
  */
+@SpringBootApplication
 @EnableDiscoveryClient
 @EnableAsync
-@SpringBootApplication
 @MapperScan(basePackages={"club.codecloud.message.service.dao"})
 public class MessageServiceApplication {
     public static void main(String[] args) {
