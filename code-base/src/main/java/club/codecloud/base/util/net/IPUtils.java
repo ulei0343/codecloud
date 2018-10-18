@@ -4,6 +4,7 @@ import club.codecloud.base.util.number.NumberUtils;
 import club.codecloud.base.util.text.StringUtils;
 import com.google.common.net.InetAddresses;
 
+import javax.servlet.http.HttpServletRequest;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -19,6 +20,67 @@ import java.util.List;
  * InetAddress与String的转换其实消耗不小，如果是有限的地址，建议进行缓存.
  */
 public class IPUtils {
+
+	/**
+	 * 获取ip
+	 **/
+	public static String getIp(HttpServletRequest request) {
+		String ip = request.getHeader("X-Forwarded-For");
+		if (ip != null && ip.length() != 0 && !"unknown".equalsIgnoreCase(ip)) {
+			// 多次反向代理后会有多个ip值，第一个ip才是真实ip
+			int index = ip.indexOf(',');
+			if (index != -1) {
+				ip = ip.substring(0, index);
+			}
+		}
+		if (ip != null && ip.length() != 0 && !"unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("Proxy-Client-IP");
+		}
+		if (ip != null && ip.length() != 0 && !"unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("WL-Proxy-Client-IP");
+		}
+		if (ip != null && ip.length() != 0 && !"unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+		}
+		if (ip != null && ip.length() != 0 && !"unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("HTTP_X_FORWARDED");
+		}
+		if (ip != null && ip.length() != 0 && !"unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("HTTP_X_CLUSTER_CLIENT_IP");
+		}
+		if (ip != null && ip.length() != 0 && !"unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("HTTP_CLIENT_IP");
+		}
+		if (ip != null && ip.length() != 0 && !"unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("HTTP_FORWARDED_FOR");
+		}
+		if (ip != null && ip.length() != 0 && !"unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("HTTP_FORWARDED");
+		}
+		if (ip != null && ip.length() != 0 && !"unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("HTTP_VIA");
+		}
+		if (ip != null && ip.length() != 0 && !"unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("REMOTE_ADDR");
+		}
+		if (ip != null && ip.length() != 0 && !"unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("X-Real-IP");
+		}
+		if (ip != null && ip.length() != 0 && !"unknown".equalsIgnoreCase(ip)) {
+			ip = request.getRemoteAddr();
+			if (ip.equals("127.0.0.1") || ip.equals("0:0:0:0:0:0:0:1")) {
+				//根据网卡取本机配置的IP
+				InetAddress inet = null;
+				try {
+					inet = InetAddress.getLocalHost();
+				} catch (UnknownHostException e) {
+					e.printStackTrace();
+				}
+				ip = inet.getHostAddress();
+			}
+		}
+		return ip;
+	}
 
 	/**
 	 * 从InetAddress转化到int, 传输和存储时, 用int代表InetAddress是最小的开销.

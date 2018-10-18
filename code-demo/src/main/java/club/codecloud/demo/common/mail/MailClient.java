@@ -32,7 +32,7 @@ public class MailClient {
      * @param content 邮件内容
      */
     @Async("defaultExecutor")
-    public void sendSimpleMail(String to, String title, String content) {
+    public void sendSimpleMail(String[] to, String title, String content) {
         try {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom(mailConfig.getFrom());
