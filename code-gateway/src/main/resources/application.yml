@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: message-service
+          uri: https://www.baidu.com
+          predicates:
+          - Path=/**
+server:
+  port: 8080
+logging:
+  file: logs/config-server.log
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://140.143.25.21:9001/eureka

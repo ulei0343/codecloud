@@ -1,6 +1,6 @@
 spring:
   application:
-    name: message
+    name: message-service
   cloud:
     config:
       profile: dev

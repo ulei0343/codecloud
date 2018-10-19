@@ -15,6 +15,7 @@
         <module>code-demo</module>
         <module>code-hystrix-dashboard</module>
         <module>code-zuul</module>
+        <module>code-gateway</module>
     </modules>
     <packaging>pom</packaging>
 
