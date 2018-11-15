@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
  * @author ulei
  * @date 2018/4/12
  */
-@Component
+//@Component
 public class GoldPriceQueryTask {
 
     private static final Logger logger = LoggerFactory.getLogger(GoldPriceQueryTask.class);

@@ -60,6 +60,10 @@ spring:
         login-username: admin
         login-password: admin
         allow:
+  data:
+    elasticsearch:
+      cluster-nodes: localhost:9300
+      cluster-name: elasticsearch
 mybatis:
   type-aliases-package: club.codecloud.demo.entity
   mapper-locations: classpath:mapper/*.xml

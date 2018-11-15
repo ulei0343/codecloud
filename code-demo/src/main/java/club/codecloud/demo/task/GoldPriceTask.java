@@ -20,7 +20,7 @@ import java.util.Date;
  * @author ulei
  * @date 2018/10/12
  */
-@Component
+//@Component
 public class GoldPriceTask {
 
     private static final Logger logger = LoggerFactory.getLogger(GoldPriceTask.class);
