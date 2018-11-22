@@ -19,7 +19,7 @@ public interface UserService extends BaseService<UserDO> {
     List<UserDO> listAllUser();
 
 //    @CacheInvalidate(name = "user:selectNameById:", key = "#userDO.getId()")
-    @CacheUpdate(name = "user:selectNameById:", key = "#userDO.getId()", value = "#userDO.getUsername()")
+//    @CacheUpdate(name = "user:selectNameById:", key = "#userDO.getId()", value = "#userDO.getUsername()")
     int updateNameById(UserDO userDO);
 
     @Cached(name = "user:selectNameById:", key = "#id", expire = 1, timeUnit = TimeUnit.HOURS)

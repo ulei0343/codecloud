@@ -39,9 +39,9 @@ spring:
   datasource:
     druid:
       driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://192.168.1.81:3308/p2p_tempdb?useUnicode=true&amp;characterEncoding=utf8&allowMultiQueries=true&amp;autoReconnect=true&amp;zeroDateTimeBehavior=convertToNull&useSSL=false
-      username: operation_w
-      password: hzoper@12ation
+      url: jdbc:mysql://140.143.25.21:58764/codecloud?useUnicode=true&amp;characterEncoding=utf8&allowMultiQueries=true&amp;autoReconnect=true&amp;zeroDateTimeBehavior=convertToNull&useSSL=false
+      username: codecloud
+      password: E7*gGWe^96vXEOi%
       type: com.alibaba.druid.pool.DruidDataSource
       maxActive: 1000
       initialSize: 10
@@ -89,3 +89,6 @@ jetcache:
       host: 192.168.1.103
       port: 64454
       database: 0
+logging:
+  level:
+    club.codecloud.demo.dao: DEBUG
