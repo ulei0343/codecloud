@@ -13,7 +13,7 @@ spring:
   mail:
     host: smtp.exmail.qq.com
     username: admin@codecloud.club
-    password: 123456
+    password: oMZ&KSBIt%f^6ip9
     defaultEncoding: UTF-8
     properties:
       mail:
@@ -64,6 +64,8 @@ spring:
     elasticsearch:
       cluster-nodes: localhost:9300
       cluster-name: elasticsearch
+      repositories:
+        enabled: true
 mybatis:
   type-aliases-package: club.codecloud.demo.entity
   mapper-locations: classpath:mapper/*.xml

@@ -7,7 +7,7 @@ import java.io.IOException;
 /**
  * @author lei
  */
-@WebFilter(filterName = "logFilter", urlPatterns = "/*")
+//@WebFilter(filterName = "logFilter", urlPatterns = "/*")
 public class LogFilter implements Filter {
 
     @Override
