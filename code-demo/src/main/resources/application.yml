@@ -91,3 +91,6 @@ jetcache:
       host: 192.168.1.103
       port: 64454
       database: 0
+logging:
+  level:
+    club.codecloud.demo.dao: DEBUG
