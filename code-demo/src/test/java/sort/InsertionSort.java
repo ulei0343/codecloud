@@ -10,7 +10,7 @@ import java.util.Arrays;
  */
 public class InsertionSort extends AbstractSort {
     public static void main(String[] args) {
-        int[] arr = {1, 4, 2, 7, 9, 8, 3, 6};
+        Integer[] arr = {1, 4, 2, 7, 9, 8, 3, 6};
         new InsertionSort().sort(arr);
         System.out.println("结果：" + Arrays.toString(arr));
     }
@@ -22,12 +22,11 @@ public class InsertionSort extends AbstractSort {
      * @param arr
      */
     @Override
-    public void sort(int[] arr) {
-        for (int i = 1; i < arr.length; i++) {
-            int j = i;
-            while (j > 0 && arr[j] < arr[j - 1]) {
+    public void sort(Comparable[] arr) {
+        int length = arr.length;
+        for (int i = 1; i < length; i++) {
+            for (int j = i; j > 0 && less(arr[j], arr[j - 1]); j--) {
                 swap(arr, j, j - 1);
-                j--;
             }
         }
     }

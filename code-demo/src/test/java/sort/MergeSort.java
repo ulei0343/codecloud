@@ -11,18 +11,18 @@ import java.util.Arrays;
  */
 public class MergeSort extends AbstractSort {
     public static void main(String[] args) {
-        int[] arr = {9, 8, 7, 6, 5, 4, 3, 2, 1};
+        Integer[] arr = {9, 8, 7, 6, 5, 4, 3, 2, 1};
         new MergeSort().sort(arr);
         System.out.println(Arrays.toString(arr));
     }
 
     @Override
-    public void sort(int[] arr) {
-        int[] temp = new int[arr.length];//在排序前，先建好一个长度等于原数组长度的临时数组，避免递归中频繁开辟空间
-        sort(arr, 0, arr.length - 1, temp);
+    public void sort(Comparable[] arr) {
+        /*int[] temp = new int[arr.length];//在排序前，先建好一个长度等于原数组长度的临时数组，避免递归中频繁开辟空间
+        sort(arr, 0, arr.length - 1, temp);*/
     }
 
-    private void sort(int[] arr, int left, int right, int[] temp) {
+    private void sort(Integer[] arr, int left, int right, int[] temp) {
         if (left < right) {
             int mid = (left + right) / 2;
             sort(arr, left, mid, temp);//左边归并排序，使得左子序列有序
@@ -31,7 +31,7 @@ public class MergeSort extends AbstractSort {
         }
     }
 
-    private void merge(int[] arr, int left, int mid, int right, int[] temp) {
+    private void merge(Integer[] arr, int left, int mid, int right, int[] temp) {
         int i = left;//左序列指针
         int j = mid + 1;//右序列指针
         int t = 0;//临时数组指针
