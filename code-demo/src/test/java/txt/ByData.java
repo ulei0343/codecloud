@@ -48,8 +48,8 @@ public class ByData {
                 String subscribe = responseData.getInteger("subscribe").equals(1) ? "是" : "否";
 
 
-                String item = String.valueOf(bindTime) + "\t" + String.valueOf(userId) + "\t" + String.valueOf(days) +
-                        "\t" + String.valueOf(takeCourseNum) + "\t" + subscribe + "\t" + wechatName;
+                String item = bindTime + "\t" + userId + "\t" + days +
+                        "\t" + takeCourseNum + "\t" + subscribe + "\t" + wechatName;
                 System.out.println(item);
             }
         }
