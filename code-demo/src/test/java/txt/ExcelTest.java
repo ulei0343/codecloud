@@ -17,8 +17,11 @@ public class ExcelTest {
         HSSFWorkbook wb = new HSSFWorkbook();
         HSSFSheet sheet = wb.createSheet("基础数据");
         HSSFRow title = sheet.createRow(0);
-        title.createCell(0).setCellValue("姓名");
-        title.createCell(1).setCellValue("班级");
+        title.createCell(0).setCellValue("学院昵称");
+        title.createCell(1).setCellValue("打卡数");
+        title.createCell(2).setCellValue("上课数");
+        title.createCell(3).setCellValue("绑定时间");
+        title.createCell(4).setCellValue("是否关注服务号");
 
         HSSFRow row1 = sheet.createRow(1);
         row1.createCell(0).setCellValue("张三");
