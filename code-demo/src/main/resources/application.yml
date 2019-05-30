@@ -69,6 +69,7 @@ spring:
 mybatis:
   type-aliases-package: club.codecloud.demo.entity
   mapper-locations: classpath:mapper/*.xml
+  type-handlers-package: club.codecloud.demo.common.constant
 jetcache:
   statIntervalMinutes: 15
   areaInCacheName: false

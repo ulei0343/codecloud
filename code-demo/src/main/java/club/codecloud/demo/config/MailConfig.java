@@ -1,4 +1,4 @@
-package club.codecloud.demo.common.mail;
+package club.codecloud.demo.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

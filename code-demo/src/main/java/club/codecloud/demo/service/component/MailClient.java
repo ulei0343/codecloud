@@ -1,5 +1,6 @@
-package club.codecloud.demo.common.mail;
+package club.codecloud.demo.service.component;
 
+import club.codecloud.demo.config.MailConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

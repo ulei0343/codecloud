@@ -15,13 +15,13 @@ import java.util.concurrent.TimeUnit;
  */
 public interface UserService extends BaseService<UserDO> {
 
-    @Cached(name = "userCache", expire = 60)
+//    @Cached(name = "userCache", expire = 60)
     List<UserDO> listAllUser();
 
 //    @CacheInvalidate(name = "user:selectNameById:", key = "#userDO.getId()")
 //    @CacheUpdate(name = "user:selectNameById:", key = "#userDO.getId()", value = "#userDO.getUsername()")
     int updateNameById(UserDO userDO);
 
-    @Cached(name = "user:selectNameById:", key = "#id", expire = 1, timeUnit = TimeUnit.HOURS)
+//    @Cached(name = "user:selectNameById:", key = "#id", expire = 1, timeUnit = TimeUnit.HOURS)
     String selectNameById(Serializable id);
 }

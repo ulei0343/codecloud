@@ -1,7 +1,8 @@
 package club.codecloud.demo.task;
 
 import club.codecloud.base.util.time.DateFormatUtils;
-import club.codecloud.demo.common.mail.MailClient;
+
+import club.codecloud.demo.service.component.MailClient;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -10,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.math.BigDecimal;

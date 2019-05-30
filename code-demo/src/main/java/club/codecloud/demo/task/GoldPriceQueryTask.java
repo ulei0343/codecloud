@@ -2,7 +2,7 @@ package club.codecloud.demo.task;
 
 import club.codecloud.base.util.net.HttpUtils;
 import club.codecloud.base.util.time.DateFormatUtils;
-import club.codecloud.demo.common.mail.MailClient;
+import club.codecloud.demo.service.component.MailClient;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -13,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.Date;

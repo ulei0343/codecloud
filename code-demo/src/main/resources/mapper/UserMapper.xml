@@ -5,6 +5,7 @@
         <result column="id" property="id"/>
         <result column="username" property="username"/>
         <result column="birthday" property="birthday" jdbcType="TIMESTAMP"/>
+        <result column="status" property="status" typeHandler="club.codecloud.demo.common.constant.CodeEnumTypeHandler"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -29,7 +30,7 @@
     </update>
 
     <select id="selectById" resultType="club.codecloud.demo.entity.UserDO">
-        select id,username,birthday from user where id=#{id}
+        select id,username,birthday,status from user where id=#{id}
     </select>
 
 </mapper>
