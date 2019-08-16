@@ -1,6 +1,4 @@
-package club.codecloud.base.util.security;
-
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
+package com.aicity.common.util.security;
 
 import javax.crypto.Cipher;
 import java.nio.charset.StandardCharsets;
@@ -22,26 +20,12 @@ public final class RSAUtils {
      */
     private static final String RSA = "RSA";
 
+    private static final String RSA_PADDING = "RSA/ECB/PKCS1Padding";
+
     /**
      * 密钥大小
      */
     private static final int KEY_SIZE = 1024;
-    /**
-     * 默认的安全服务提供者
-     */
-    private static final Provider DEFAULT_PROVIDER = new BouncyCastleProvider();
-
-    private static KeyPairGenerator keyPairGen = null;
-    private static KeyFactory keyFactory = null;
-
-    static {
-        try {
-            keyPairGen = KeyPairGenerator.getInstance(RSA, DEFAULT_PROVIDER);
-            keyFactory = KeyFactory.getInstance(RSA, DEFAULT_PROVIDER);
-        } catch (Exception e) {
-            throw new RuntimeException("init RSAUtils error", e);
-        }
-    }
 
     /**
      * 生成并返回RSA密钥对
@@ -49,8 +33,23 @@ public final class RSAUtils {
      * @return
      */
     public static KeyPair getKeyPair() {
-        keyPairGen.initialize(KEY_SIZE, new SecureRandom());
-        return keyPairGen.genKeyPair();
+        return getKeyPair(KEY_SIZE);
+    }
+
+    /**
+     * 生成并返回RSA密钥对
+     *
+     * @return
+     */
+    public static KeyPair getKeyPair(int size) {
+        KeyPairGenerator keyPairGen = null;
+        try {
+            keyPairGen = KeyPairGenerator.getInstance(RSA);
+            keyPairGen.initialize(KEY_SIZE, new SecureRandom());
+            return keyPairGen.genKeyPair();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("生成RSA钥匙对出错", e);
+        }
     }
 
     /**
@@ -77,6 +76,7 @@ public final class RSAUtils {
         try {
             byte[] keyBytes = Base64.getDecoder().decode(privateKey);
             PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(keyBytes);
+            KeyFactory keyFactory = KeyFactory.getInstance(RSA);
             return (RSAPrivateKey) keyFactory.generatePrivate(spec);
         } catch (Exception e) {
             throw new RuntimeException("RSA加密获取私钥出错", e);
@@ -87,6 +87,7 @@ public final class RSAUtils {
         try {
             byte[] keyBytes = Base64.getDecoder().decode(publicKey);
             X509EncodedKeySpec spec = new X509EncodedKeySpec(keyBytes);
+            KeyFactory keyFactory = KeyFactory.getInstance(RSA);
             return (RSAPublicKey) keyFactory.generatePublic(spec);
         } catch (Exception e) {
             throw new RuntimeException("RSA加密获取公钥出错", e);
@@ -104,7 +105,7 @@ public final class RSAUtils {
     public static byte[] encryptByPublicKey(RSAPublicKey publicKey, byte[] data) {
 
         try {
-            Cipher cipher = Cipher.getInstance(RSA, DEFAULT_PROVIDER);
+            Cipher cipher = Cipher.getInstance(RSA_PADDING);
             // 对数据加密
             cipher.init(Cipher.ENCRYPT_MODE, publicKey);
             return cipher.doFinal(data);
@@ -139,7 +140,7 @@ public final class RSAUtils {
     public static byte[] encryptByPrivateKey(RSAPrivateKey privateKey, byte[] data) {
 
         try {
-            Cipher cipher = Cipher.getInstance(RSA, DEFAULT_PROVIDER);
+            Cipher cipher = Cipher.getInstance(RSA_PADDING);
             // 对数据加密
             cipher.init(Cipher.ENCRYPT_MODE, privateKey);
             return cipher.doFinal(data);
@@ -173,7 +174,7 @@ public final class RSAUtils {
      */
     public static byte[] decryptByPrivateKey(RSAPrivateKey privateKey, byte[] data) {
         try {
-            Cipher cipher = Cipher.getInstance(RSA, DEFAULT_PROVIDER);
+            Cipher cipher = Cipher.getInstance(RSA_PADDING);
             // 对数据解密
             cipher.init(Cipher.DECRYPT_MODE, privateKey);
             return cipher.doFinal(data);
@@ -207,7 +208,7 @@ public final class RSAUtils {
      */
     public static byte[] decryptByPublicKey(RSAPublicKey publicKey, byte[] data) {
         try {
-            Cipher cipher = Cipher.getInstance(RSA, DEFAULT_PROVIDER);
+            Cipher cipher = Cipher.getInstance(RSA_PADDING);
             // 对数据解密
             cipher.init(Cipher.DECRYPT_MODE, publicKey);
             return cipher.doFinal(data);
