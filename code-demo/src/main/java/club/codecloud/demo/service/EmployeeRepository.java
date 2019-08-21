@@ -12,7 +12,7 @@ import java.util.List;
  * @author ulei
  */
 @Service
-public interface EmployeeService extends ElasticsearchRepository<Employee, Integer> {
+public interface EmployeeRepository extends ElasticsearchRepository<Employee, Integer> {
 
     List<Employee> findByLastName(String lastName);
 

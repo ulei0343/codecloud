@@ -3,7 +3,7 @@ package club.codecloud.demo.controller;
 import club.codecloud.base.util.base.Result;
 import club.codecloud.base.util.number.RandomUtils;
 import club.codecloud.demo.entity.Employee;
-import club.codecloud.demo.service.EmployeeService;
+import club.codecloud.demo.service.EmployeeRepository;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,28 +18,28 @@ import java.util.Optional;
  * @date 2018/11/15
  */
 @RestController
-@RequestMapping("/es/codecloud")
+@RequestMapping("es/employee")
 public class ElasticSearchController {
 
     @Autowired
-    EmployeeService employeeService;
+    EmployeeRepository employeeRepository;
 
 
     @RequestMapping("/lastName/{lastName}")
     public Result findEmployeesByLastName(@PathVariable String lastName) {
-        List<Employee> employeeList = employeeService.findByLastName(lastName);
+        List<Employee> employeeList = employeeRepository.findByLastName(lastName);
         return Result.success(employeeList);
     }
 
     @RequestMapping("/{id}")
     public Result findEmployeesById(@PathVariable Integer id) {
-        Optional<Employee> employee = employeeService.findById(id);
+        Optional<Employee> employee = employeeRepository.findById(id);
         return Result.success(employee);
     }
 
     @RequestMapping("/age/{minAge}-{maxAge}")
     public Result findEmployeesByAgeBetweenOrderByAgeDesc(@PathVariable Integer minAge, @PathVariable Integer maxAge) {
-        List<Employee> employeeList = employeeService.findByAgeBetweenOrderByAgeDesc(minAge, maxAge);
+        List<Employee> employeeList = employeeRepository.findByAgeBetweenOrderByAgeDesc(minAge, maxAge);
         return Result.success(employeeList);
     }
 
@@ -63,7 +63,7 @@ public class ElasticSearchController {
             employee.setAbout(RandomUtils.randomStringFixLength(20));
             employeeList.add(employee);
         }
-        employeeService.saveAll(employeeList);
+        employeeRepository.saveAll(employeeList);
 
         return Result.success("ok");
     }

@@ -22,10 +22,10 @@ import java.util.List;
 @SpringBootTest(classes = DemoApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner.class)
 @Slf4j
-public class EmployeeServiceTest {
+public class EmployeeRepositoryTest {
 
     @Autowired
-    EmployeeService employeeService;
+    EmployeeRepository employeeRepository;
 
     private ObjectWriter objectWriter = new ObjectMapper().writerWithDefaultPrettyPrinter();
 
@@ -33,14 +33,14 @@ public class EmployeeServiceTest {
     @Test
     public void findEmployeesByLastName() throws JsonProcessingException {
         String lastName = "grKwMSdk";
-        List<Employee> employeeList = employeeService.findByLastName(lastName);
+        List<Employee> employeeList = employeeRepository.findByLastName(lastName);
         String data = objectWriter.writeValueAsString(employeeList);
         log.info("\n" + data);
     }
 
     @Test
     public void findEmployeesByAgeBetweenOrderByAgeDesc() throws JsonProcessingException {
-        List<Employee> employeeList = employeeService.findByAgeBetweenOrderByAgeDesc(24, 28);
+        List<Employee> employeeList = employeeRepository.findByAgeBetweenOrderByAgeDesc(24, 28);
         String data = objectWriter.writeValueAsString(employeeList);
         log.info("\n" + data);
     }
@@ -48,21 +48,21 @@ public class EmployeeServiceTest {
     @Test
     public void findEmployeesByLastNameLike() throws JsonProcessingException {
         String lastName = "ab";
-        List<Employee> employeeList = employeeService.findByLastNameLike(lastName);
+        List<Employee> employeeList = employeeRepository.findByLastNameLike(lastName);
         String data = objectWriter.writeValueAsString(employeeList);
         log.info("\n" + data);
     }
 
     @Test
     public void findByLastNameIsContaining() throws JsonProcessingException {
-        List<Employee> employeeList = employeeService.findByLastNameIsContaining("ab", "dd");
+        List<Employee> employeeList = employeeRepository.findByLastNameIsContaining("ab", "dd");
         String data = objectWriter.writeValueAsString(employeeList);
         log.info("\n" + data);
     }
 
     @Test
     public void findByLastNameAndAge() throws JsonProcessingException {
-        List<Employee> employeeList = employeeService.findByLastNameLikeAndAge("dd", 13);
+        List<Employee> employeeList = employeeRepository.findByLastNameLikeAndAge("dd", 13);
         String data = objectWriter.writeValueAsString(employeeList);
         log.info("\n" + data);
     }
@@ -71,7 +71,7 @@ public class EmployeeServiceTest {
     public void findByAgeBetweenOrderByAgeDesc() throws JsonProcessingException {
         int pageSize = 100;
         Pageable page = PageRequest.of(4, pageSize);
-        Page<Employee> employeePage = employeeService.findByAgeBetweenOrderByAgeDesc(24, 28, page);
+        Page<Employee> employeePage = employeeRepository.findByAgeBetweenOrderByAgeDesc(24, 28, page);
         String data = objectWriter.writeValueAsString(employeePage.getContent());
         long pageTotal = MathUtils.divide(employeePage.getTotalElements(), pageSize, RoundingMode.UP);
         log.info("{}/{}-{}:\n{}", employeePage.getTotalPages(), pageTotal, employeePage.getTotalElements(), data);
