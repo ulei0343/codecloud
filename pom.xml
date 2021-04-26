@@ -27,7 +27,7 @@
         <spring-cloud.version>Finchley.RC1</spring-cloud.version>
         <guava.version>23.0</guava.version>
         <common-lang3.version>3.7</common-lang3.version>
-        <commons-io.version>2.6</commons-io.version>
+        <commons-io.version>2.7</commons-io.version>
         <commons-collections.version>4.2</commons-collections.version>
         <fastjson.version>1.2.49</fastjson.version>
 
